@@ -1,0 +1,11 @@
+Logfile initialized
+[INFO] logfile = /Users/hugoafj/Documents/Titanium Studio Workspace/TrueLove/build.log
+[DEBUG] /Users/hugoafj/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120504170331/android/builder.py emulator TrueLove /Users/hugoafj/android-sdk-macosx /Users/hugoafj/Documents/Titanium Studio Workspace/TrueLove com.hugoafj.truelove 2 HVGA
+[INFO] Launching Android emulator...one moment
+[DEBUG] From: /Users/hugoafj/android-sdk-macosx/tools/emulator
+[DEBUG] SDCard: /Users/hugoafj/.titanium/android2.sdcard
+[DEBUG] AVD ID: 2
+[DEBUG] AVD Skin: HVGA
+[DEBUG] SDK: /Users/hugoafj/android-sdk-macosx
+[DEBUG] /Users/hugoafj/android-sdk-macosx/tools/emulator -avd titanium_2_HVGA -port 5560 -sdcard /Users/hugoafj/.titanium/titanium_2_HVGA.sdcard -logcat *:d,* -no-boot-anim -partition-size 128
+[INFO] Android Emulator has exited

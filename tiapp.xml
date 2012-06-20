@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app xmlns:ti="http://ti.appcelerator.org">
+    <property name="acs-oauth-secret-production" type="string">qsr6fvGQvutAst9kCVa2I6LYrzPe6sUm</property>
+    <property name="acs-oauth-key-production" type="string">tnlJwITJ0eCKcWNF7kg7crNDAsCndQ3Q</property>
+    <property name="acs-api-key-production" type="string">7fh4sQZgE6TZb9HvPK3SxdArCEk1ryUM</property>
+    <property name="acs-oauth-secret-development" type="string">xYQnTSTZjfXltaZWxciLkCnhEvl4tgtD</property>
+    <property name="acs-oauth-key-development" type="string">SOXUckqrVA0DLrgOQY23hW8r5jE7YuM1</property>
+    <property name="acs-api-key-development" type="string">k6zmUJgO42woIgkaCinOpeBldPA9AwfQ</property>
+    <deployment-targets>
+        <target device="mobileweb">true</target>
+        <target device="iphone">true</target>
+        <target device="ipad">true</target>
+        <target device="android">true</target>
+        <target device="blackberry">false</target>
+    </deployment-targets>
+    <sdk-version>2.1.0.v20120504170331</sdk-version>
+    <id>com.hugoafj.truelove</id>
+    <name>TrueLove</name>
+    <version>1.0</version>
+    <publisher>hugoafj</publisher>
+    <url>http://</url>
+    <description>not specified</description>
+    <copyright>2012 by hugoafj</copyright>
+    <icon>appicon.png</icon>
+    <persistent-wifi>false</persistent-wifi>
+    <prerendered-icon>false</prerendered-icon>
+    <statusbar-style>default</statusbar-style>
+    <statusbar-hidden>false</statusbar-hidden>
+    <fullscreen>false</fullscreen>
+    <navbar-hidden>false</navbar-hidden>
+    <analytics>true</analytics>
+    <guid>956fee52-8872-4be3-8cbc-e00d213d996b</guid>
+    <property name="ti.ui.defaultunit">system</property>
+    <iphone>
+        <orientations device="iphone">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+        </orientations>
+        <orientations device="ipad">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+            <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
+        </orientations>
+    </iphone>
+    <android xmlns:android="http://schemas.android.com/apk/res/android"/>
+    <mobileweb>
+        <precache/>
+        <splash>
+            <enabled>true</enabled>
+            <inline-css-images>true</inline-css-images>
+        </splash>
+        <theme>default</theme>
+    </mobileweb>
+    <modules>
+        <module platform="commonjs" version="2.0.5">ti.cloud</module>
+    </modules>
+</ti:app>
