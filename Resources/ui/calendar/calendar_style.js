@@ -7,9 +7,8 @@ App.UI.calendar.style = {
   LANDSCAPE: {},
   	win_calendar: {  
 	    title:'Calendar',
-	    backgroundColor:'red',
+	    backgroundColor:'white',
 	    navBarHidden:true,
-	    height:370,
 	    top:0
 	}  
 };

@@ -15,6 +15,9 @@ App.UI.menu = {
 		
 		var vwContainer		= Ti.UI.createView(style.vwContainer);
 		var vwImage			= Ti.UI.createView(style.vwImage);
+		var vwLine			= Ti.UI.createView(style.vwLine);
+		var vwImageLogo		= Ti.UI.createView(style.vwImageLogo);
+		var vwOpenClose		= Ti.UI.createView(style.vwOpenClose);
 		
 		var vmtrueloveFm	= Ti.UI.createView(style.vmtrueloveFm);
 		var vwSettings		= Ti.UI.createView(style.vwSettings);
@@ -51,6 +54,9 @@ App.UI.menu = {
 		vwFavorites.add(lblFavorites);
 		
 		vwContainer.add(vwImage);
+		vwImage.add(vwImageLogo);
+		vwImage.add(vwLine);
+		vwImage.add(vwOpenClose);
 		vwContainer.add(vmtrueloveFm);
 		vwContainer.add(vwSettings);
 		vwContainer.add(vwCalendar);
@@ -67,17 +73,21 @@ App.UI.menu = {
 				
 				win.animate({bottom:-60,duration:50});
 				tempWin.animate({height:430,duration:50});
-				//tempWin.height=370;
-				Ti.API.info(1);
+				
+				TL.merge(vwOpenClose,{
+					backgroundImage:'/images/arrowOpen.png'
+				});
+				
 				flag='1'
 			}
 			else{
 				flag='0';
 				win.animate({bottom:0,duration:100});
-				//tempWin.height=370;
-				Ti.API.info(2);
 				tempWin.animate({height:370,duration:100});
-				//tempWin.height=370;
+				
+				TL.merge(vwOpenClose,{
+					backgroundImage:'/images/arrowClose.png'
+				});
 			}
 			
 		});
@@ -87,6 +97,15 @@ App.UI.menu = {
 			tempWin.close();
 			tempWin = App.UI.webpage.init();
 			tempWin.open();
+			
+			win.animate({bottom:-60,duration:50});
+			tempWin.animate({height:430,duration:50});
+			
+			TL.merge(vwOpenClose,{
+					backgroundImage:'/images/arrowOpen.png'
+				});
+			
+			flag='1'
 		});
 		vwSettings.addEventListener('click',function(e){
 			//alert('vwSettings');
@@ -94,6 +113,15 @@ App.UI.menu = {
 			tempWin.close();
 			tempWin = App.UI.settings.init();
 			tempWin.open();
+			
+			win.animate({bottom:-60,duration:50});
+			tempWin.animate({height:430,duration:50});
+			
+			TL.merge(vwOpenClose,{
+					backgroundImage:'/images/arrowOpen.png'
+				});
+			
+			flag='1'
 		});
 		vwCalendar.addEventListener('click',function(e){
 			//alert('vwCalendar');
@@ -101,6 +129,15 @@ App.UI.menu = {
 			tempWin.close();
 			tempWin = App.UI.calendar.init();
 			tempWin.open();
+			
+			win.animate({bottom:-60,duration:50});
+			tempWin.animate({height:430,duration:50});
+			
+			TL.merge(vwOpenClose,{
+					backgroundImage:'/images/arrowOpen.png'
+				});
+			
+			flag='1'
 		});
 		vwFavorites.addEventListener('click',function(e){
 			//alert('vwFavorites');
@@ -108,10 +145,22 @@ App.UI.menu = {
 			tempWin.close();
 			tempWin = App.UI.save.init();
 			tempWin.open();
+			
+			win.animate({bottom:-60,duration:50});
+			tempWin.animate({height:430,duration:50});
+			
+			TL.merge(vwOpenClose,{
+					backgroundImage:'/images/arrowOpen.png'
+				});
+			
+			flag='1'
 		});
 		
 		tempWin = App.UI.calendar.init();
 		tempWin.open();
+		win.animate({bottom:-60,duration:0});
+		tempWin.animate({height:430,duration:0});
+		flag='1'
 		return win;
 
 		
