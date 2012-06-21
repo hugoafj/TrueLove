@@ -6,66 +6,98 @@ App.UI.menu.style = {
   PORTRAIT: {},
   LANDSCAPE: {},
 	win: {  
-	    backgroundColor:'blue',
+	    backgroundColor:'#151515',
 	    navBarHidden:true,
 	    bottom:0,
 	    height:90,
-	    zIndex:99
+	    zIndex:99,
+	    width:321,
+	    left:-1
 	    
 	},
 	vwContainer:{
 		width:320,
 		height:90,
-		backgroundColor:'orange'
+		backgroundColor:'#151515'
 	},
 	vwImage:{
 		width:320,
 		height:30,
 		top:0,
-		backgroundColor:'green'
+	},
+	vwImageLogo:{
+		width:32,
+		height:28,
+		backgroundImage:'/images/logoMenu.png'
+	},
+	vwLine:{
+		width:1,
+		height:30,
+		right:39,
+		borderColor:"#707070",
+		borderWidth:0.5,
+		backgroundImage:'/images/arrowOpen.png'
+	},
+	vwOpenClose:{
+		width:20,
+		height:10,
+		right:8,
+		backgroundImage:'/images/arrowOpen.png'
 	},
 	vmtrueloveFm:{
-		width:160,
+		width:161,
 		height:30,
 		top:30,
 		left:0,
-		backgroundColor:'pink'
+		borderColor:"#707070",
+		borderWidth:0.5,
+		backgroundColor:'#151515'
 	},
 	vwSettings:{
-		width:160,
+		width:161,
 		height:30,
 		top:60,
 		left:0,
-		backgroundColor:'purple'
+		borderColor:"#707070",
+		borderWidth:0.5,
+		backgroundColor:'#151515'
 	},
 	vwCalendar:{
-		width:160,
+		width:161,
 		height:30,
 		top:30,
-		left:160,
-		backgroundColor:'red'		
+		left:161,
+		borderColor:"#707070",
+		borderWidth:0.5,
+		backgroundColor:'#151515'		
 	},
 	vwFavorites:{
-		width:160,
+		width:161,
 		height:30,
 		top:60,
-		left:160,
-		backgroundColor:'yellow'		
+		left:161,
+		borderColor:"#707070",
+		borderWidth:0.5,
+		backgroundColor:'#151515'		
 	},
 	lbltrueLove:{
 		width:Ti.UI.size,
-		height:Ti.UI.size
+		height:Ti.UI.size,
+		color:"white"
 	},
 	lblCalendar:{
 		width:Ti.UI.size,
-		height:Ti.UI.size
+		height:Ti.UI.size,
+		color:"white"
 	},
 	lblSettings:{
 		width:Ti.UI.size,
-		height:Ti.UI.size
+		height:Ti.UI.size,
+		color:"white"
 	},
 	lblFavorites:{
 		width:Ti.UI.size,
-		height:Ti.UI.size
+		height:Ti.UI.size,
+		color:"white"
 	}  
 };

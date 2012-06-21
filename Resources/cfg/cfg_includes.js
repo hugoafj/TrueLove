@@ -24,6 +24,12 @@ Ti.include(
 	DIR + "ui/webpage/webpage_style.js",
 		
 	DIR + "ui/share/share.js",
-	DIR + "ui/share/share_style.js"
+	DIR + "ui/share/share_style.js",
+	
+	DIR + "ui/messages/messages.js",
+	DIR + "ui/messages/messages_style.js",
+	
+	DIR + "ui/message/message.js",
+	DIR + "ui/message/message_style.js"
 	
 );
