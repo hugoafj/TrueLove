@@ -9,15 +9,18 @@ App.UI.webpage = {
 	init: function() {
 		
 	// INSTANTIATION
-		var style 			= App.UI.webpage.style;
-		var win				= Titanium.UI.createWindow(style.win);
+		var style 		= App.UI.webpage.style;
+		var win			= Titanium.UI.createWindow(style.win);
+		var web			= Ti.UI.createWebView();
 		
 		
 	// STYLING
-		
+		TL.merge(web, {
+			url:'http://www.truelovefm.com/'
+		});
 		
 	// ADDITIONS
-		
+		win.add(web);
 		
 	// CODE
 		

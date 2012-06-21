@@ -8,6 +8,9 @@ Ti.include(
 	DIR + "ui/login/login.js",
 	DIR + "ui/login/login_style.js",
 	
+	DIR + "ui/signup/signup.js",
+	DIR + "ui/signup/signup_style.js",
+	
 	DIR + "ui/menu/menu.js",
 	DIR + "ui/menu/menu_style.js",
 	

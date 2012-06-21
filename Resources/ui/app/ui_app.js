@@ -10,7 +10,8 @@ App.UI.app = {
 		
 		// INSTANTIATION
 		//App.UI.app.win		= App.UI.calendar.init();
-		var menu			= App.UI.menu.init();
+		
+		//var menu			= App.UI.menu.init();//--------->>>
 
 		// STYLING
 			
@@ -19,9 +20,13 @@ App.UI.app = {
 		// CODE
 		//App.UI.app.win.open();
 		//App.UI.calendar.init();
-		menu.open();
+		
+		//menu.open();//--------->>>
 			
 		// LISTENERS
-				
+		App.UI.login.init().open({modal:true});//--------->>>
+		//App.UI.signup.init().open({modal:true});//--------->>>
+		//App.UI.webpage.init().open({modal:true});;//--------->>>
+		//App.UI.settings.init().open({modal:true});--------->>>
 	}
 };
