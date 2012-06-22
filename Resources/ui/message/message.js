@@ -19,6 +19,7 @@ App.UI.message = {
 		var scvMsg			= Ti.UI.createScrollView(style.scvMsg);			
 		var txtMsg			= Ti.UI.createLabel(style.txtMsg);
 		var login 			= Ti.Facebook.createLoginButton(style.login);
+		var status=0;
 		
 		Titanium.Facebook.appid = "404794309570960";
 		Titanium.Facebook.permissions = ['publish_stream', 'read_stream'];
@@ -43,8 +44,9 @@ App.UI.message = {
 		Ti.API.info(txtMsg);
 		
 	// CODE
+			
 			// Create a TableView.
-		var aTableView = Ti.UI.createTableView({height:150,bottom:-100});
+		var aTableView = Ti.UI.createTableView({height:175,bottom:-200,scrollable:false});
 		
 		// Populate the TableView data.
 		var data = [
@@ -56,9 +58,14 @@ App.UI.message = {
 		aTableView.addEventListener('click', function(e) {
 			//alert('title: \'' + e.row.title + '\', section: \'' + e.section.headerTitle + '\', index: ' + e.index);
 			//aTableView.setBottom(-100);
+			//if(status)
 			if(e.row.title=='Facebook'){
 				aTableView.top=600;
-				Ti.Facebook.authorize();
+				if(Ti.App.Properties.getString('face') == "false")
+					Ti.Facebook.authorize();
+				else
+					posttoFacebook();
+				//status='true';
 			}
 			
 		});
@@ -94,11 +101,14 @@ App.UI.message = {
 	
 	
 		function showRequestResult(e) {
+			Ti.API.info(333);
+			//status=0;
 			var s = '';
 			if (e.success) {
 				s = "SUCCESS";
 				if (e.result) {
 					s += "; " + e.result;
+					alert('The message was posted on Facebook');
 				}
 				if (e.data) {
 					s += "; " + e.data;
@@ -114,6 +124,7 @@ App.UI.message = {
 				s = "FAIL";
 				if (e.error) {
 					s += "; " + e.error;
+					alert('There was an error posting\n the message on Facebook');
 				}
 			}
 			//alert(s);
@@ -131,21 +142,13 @@ App.UI.message = {
 	
 	Ti.Facebook.addEventListener('login', function(e) {
 	    if (e.success) {
-	    	
-	    	var data = {
-				link: "http://truelovefm.com/",
-				name: "Truelove.fm",
-				link:"www.google.com",
-				message: "Download the application truelove",
-				caption:_cat ,
-				picture: "http://truelove.fm/app/admin/images/logo.png",
-				description: _text,
-				test: [ {foo:'Encoding test', bar:'Durp durp'}, 'test' ]
-			};
-			Titanium.Facebook.requestWithGraphPath('me/feed', data, 'POST', showRequestResult);
-	       
-	       
-	       
+	    	Ti.App.Properties.setString('face',"true");
+	    	Ti.API.info(111);
+	    	if(status==0){
+		    	posttoFacebook();
+		    	status=1;
+	    	}
+	    	//status++;
 	    } else if (e.error) {
 	        alert(e.error);
 	    } else if (e.cancelled) {
@@ -166,9 +169,29 @@ App.UI.message = {
 				alert("Message save into Favorites");
 			else
 				alert("Please try again");
-		})
+		});
+		
+		function posttoFacebook(){
+			
+			var data = {
+				link: "http://truelovefm.com/",
+				name: "Truelove.fm",
+				message: "Download the application truelove",
+				caption:_cat ,
+				picture: "http://truelove.fm/app/admin/images/logo.png",
+				description: _text,
+				test: [ {foo:'Encoding test', bar:'Durp durp'}, 'test' ]
+			};
+			Ti.API.info(222);
+			Titanium.Facebook.requestWithGraphPath('me/feed', data, 'POST', showRequestResult);
+			status=0;
+		}
+		
 
 		
 		return win;
+		
+		
+		
 	}
 };

@@ -12,7 +12,7 @@ App.UI.login.style = {
 	lblUser:{
 		height:20,
 		width:250,
-		top:5,
+		top:46,
 		font:{fontWeight:'bold'}
 	},
 	txtUser:{

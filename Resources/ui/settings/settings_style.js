@@ -17,7 +17,7 @@ App.UI.settings.style = {
 	btnLogout:{
 		height:40,
 		width:200,
-		top:30,
+		top:46,
 		borderColor:'black',
 		borderRadius:14,
 		borderWidth:2,

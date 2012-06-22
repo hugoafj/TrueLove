@@ -7,10 +7,13 @@ App.UI.webpage.style = {
   LANDSCAPE: {},
 	win: {  
 	    title:'Save',
-	    backgroundColor:'pink',
+	    backgroundColor:'white',
 	    navBarHidden:true,
 	    zIndex:0,
 	    height:370,
 	    top:0
+	},
+	web:{
+		top:46
 	}	
 };

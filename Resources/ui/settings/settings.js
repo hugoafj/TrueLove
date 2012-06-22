@@ -83,6 +83,8 @@ App.UI.settings = {
 	});
 	btnLogout.addEventListener('click',function(e){
 			Ti.App.Properties.setString('Logged', 'false');
+			Ti.Facebook.logout();
+			Ti.App.Properties.setString('face',"false");
 			App.UI.login.init().open();
 			win.close();
 	});

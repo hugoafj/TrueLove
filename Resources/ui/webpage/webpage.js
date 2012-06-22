@@ -11,7 +11,7 @@ App.UI.webpage = {
 	// INSTANTIATION
 		var style 		= App.UI.webpage.style;
 		var win			= Titanium.UI.createWindow(style.win);
-		var web			= Ti.UI.createWebView();
+		var web			= Ti.UI.createWebView(style.web);
 		
 		
 	// STYLING
