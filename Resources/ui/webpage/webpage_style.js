@@ -14,6 +14,6 @@ App.UI.webpage.style = {
 	    top:0
 	},
 	web:{
-		top:46
+		top:0
 	}	
 };

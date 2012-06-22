@@ -16,6 +16,11 @@ App.UI.settings = {
 		var btnCategory		= Ti.UI.createButton(style.btnCategory);
 		var vwline			= Ti.UI.createView(style.vwline);
 		
+		var vwContainer		= Ti.UI.createView({height:40});
+		var title			= Ti.UI.createLabel(style.title);
+		var line			= Ti.UI.createView(style.line);
+		var backBtn			= Ti.UI.createButton(style.backBtn);
+		
 		var btnCancel =  Titanium.UI.createButton({
 			title:'Cancel',
 			style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED
@@ -64,6 +69,12 @@ App.UI.settings = {
 		xhr.send();
 			
 	// ADDITIONS
+		//vwContainer.add(backBtn);
+		vwContainer.add(title);
+		vwContainer.add(line);
+		win.add(vwContainer);
+		
+		
 		win.add(btnLogout);
 		win.add(vwline);
 		win.add(btnCategory);

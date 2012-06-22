@@ -51,5 +51,29 @@ App.UI.settings.style = {
 		height:1,
 		backgroundColor:'black',
 		top:15
-	}
+	},
+	backBtn:{
+		height:24,
+		width:70,
+		top:8,
+		left:10,
+		borderColor:'black',
+		borderRadius:14,
+		borderWidth:2,
+		color:'black',
+		font:{fontSize:15, fontWeight:'bold',fontFamily:'monospace'},
+		title:"close"
+	},
+	title:{
+		text:'Settings',
+		top:10,
+		font:{fontSize:18,fontWeight:"bold"}
+	},
+	line:{
+		backgroundColor:"black",
+		height:1,
+		left:10,
+		right:13,
+		top:36
+	}	
 };

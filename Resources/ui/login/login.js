@@ -19,6 +19,10 @@ App.UI.login = {
 		var lblPass			= Ti.UI.createLabel(style.lblPass);
 		var btnSignup		= Ti.UI.createButton(style.btnSignup);
 		var mycat;
+		var vwContainer		= Ti.UI.createView({height:40});
+		var title			= Ti.UI.createLabel(style.title);
+		var line			= Ti.UI.createView(style.line);
+		var backBtn			= Ti.UI.createButton(style.backBtn);
 				
 		// STYLING
 		
@@ -53,6 +57,9 @@ App.UI.login = {
 		
 		
 		// ADDITIONS
+		vwContainer.add(title);
+		vwContainer.add(line);
+		win.add(vwContainer);
 		
 		win.add(lblUser);
 		win.add(txtUser);

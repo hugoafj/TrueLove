@@ -22,6 +22,11 @@ App.UI.signup = {
 		var lblUser			= Ti.UI.createLabel(style.lblUser);
 		var lblPass			= Ti.UI.createLabel(style.lblPass);
 		
+		var vwContainer		= Ti.UI.createView({height:40});
+		var title			= Ti.UI.createLabel(style.title);
+		var line			= Ti.UI.createView(style.line);
+		var backBtn			= Ti.UI.createButton(style.backBtn);
+		
 		var id_selected		= 0;
 		var vwPicker 		= Titanium.UI.createView(style.vwPicker);
 		var pickerValue;
@@ -121,6 +126,10 @@ App.UI.signup = {
 		
 		vwPicker.add(toolbar);
 		
+		vwContainer.add(backBtn);
+		vwContainer.add(title);
+		vwContainer.add(line);
+		win.add(vwContainer);
 		
 		win.add(lblName);
 		win.add(txtName);
@@ -130,7 +139,7 @@ App.UI.signup = {
 		win.add(txtPass);
 		win.add(btnCategory);
 		win.add(btnSignup);
-		win.add(btnCancel2);
+		//win.add(btnCancel2);
 		win.add(vwPicker);
 		
 		btnSignup.addEventListener('click',function(e){
@@ -198,7 +207,7 @@ App.UI.signup = {
 			vwPicker.top=135;
 			Ti.API.info(id_selected);
 		});
-		btnCancel2.addEventListener('click',function(e){
+		backBtn.addEventListener('click',function(e){
 			win.close();
 		});
 		
