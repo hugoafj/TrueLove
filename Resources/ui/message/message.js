@@ -43,6 +43,29 @@ App.UI.message = {
 		Ti.API.info(txtMsg);
 		
 	// CODE
+			// Create a TableView.
+		var aTableView = Ti.UI.createTableView({height:150,bottom:-100});
+		
+		// Populate the TableView data.
+		var data = [
+			{title:'Facebook', hasChild:true, color:'blue', header:'Account'}
+			];
+		aTableView.setData(data);
+		
+		// Listen for click events.
+		aTableView.addEventListener('click', function(e) {
+			//alert('title: \'' + e.row.title + '\', section: \'' + e.section.headerTitle + '\', index: ' + e.index);
+			//aTableView.setBottom(-100);
+			if(e.row.title=='Facebook'){
+				aTableView.top=600;
+				Ti.Facebook.authorize();
+			}
+			
+		});
+		
+		// Add to the parent view.
+		win.add(aTableView);
+		
 		var months=[];
 		months.push({month:"January"});
 		months.push({month:"February"});
@@ -85,31 +108,49 @@ App.UI.message = {
 				}
 			} else if (e.cancelled) {
 				s = "CANCELLED";
-			} else {
+			} 
+			
+			else {
 				s = "FAIL";
 				if (e.error) {
 					s += "; " + e.error;
 				}
 			}
-			alert(s);
+			//alert(s);
 		}
 
 		
 		
 	// LISTENERS 
 	share.addEventListener('click', function() {
-	Ti.Facebook.authorize();
-	var data = {
-		link: "https://developer.mozilla.org/en/JavaScript",
-		name: "Best online Javascript reference",
-		message: "Use Mozilla's online Javascript reference",
-		caption: "MDN Javascript Reference",
-		picture: "http://truelove.fm/app/admin/images/logo.png",
-		description: "This section of the site is dedicated to JavaScript-the-language, the parts that are not specific to web pages or other host environments...",
-		test: [ {foo:'Encoding test', bar:'Durp durp'}, 'test' ]
-	};
-	Titanium.Facebook.requestWithGraphPath('me/feed', data, 'POST', showRequestResult);
-});
+		
+		aTableView.top=250;
+				
+	});
+	
+	Ti.Facebook.addEventListener('login', function(e) {
+	    if (e.success) {
+	    	
+	    	var data = {
+				link: "http://truelovefm.com/",
+				name: "Truelove.fm",
+				link:"www.google.com",
+				message: "Download the application truelove",
+				caption:_cat ,
+				picture: "http://truelove.fm/app/admin/images/logo.png",
+				description: _text,
+				test: [ {foo:'Encoding test', bar:'Durp durp'}, 'test' ]
+			};
+			Titanium.Facebook.requestWithGraphPath('me/feed', data, 'POST', showRequestResult);
+	       
+	       
+	       
+	    } else if (e.error) {
+	        alert(e.error);
+	    } else if (e.cancelled) {
+	       // alert("Canceled");
+	    }
+	});
 	
 		
 		return win;

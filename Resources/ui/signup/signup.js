@@ -17,6 +17,7 @@ App.UI.signup = {
 		var txtName			= Ti.UI.createTextField(style.txtName);
 		var btnSignup		= Ti.UI.createButton(style.btnSignup);
 		var btnCategory		= Ti.UI.createButton(style.btnCategory);
+		var btnCancel2		= Ti.UI.createButton(style.btnCancel2);
 		var lblName			= Ti.UI.createLabel(style.lblName);
 		var lblUser			= Ti.UI.createLabel(style.lblUser);
 		var lblPass			= Ti.UI.createLabel(style.lblPass);
@@ -83,7 +84,9 @@ App.UI.signup = {
 		TL.merge(lblName, {
 			text:'Full Name:'
 		});
-		
+		TL.merge(btnCancel2,{
+			title:'Cancel'
+		});
 		
 		// ADDITIONS
 		
@@ -127,6 +130,7 @@ App.UI.signup = {
 		win.add(txtPass);
 		win.add(btnCategory);
 		win.add(btnSignup);
+		win.add(btnCancel2);
 		win.add(vwPicker);
 		
 		btnSignup.addEventListener('click',function(e){
@@ -189,6 +193,14 @@ App.UI.signup = {
 			vwPicker.top=135;
 			Ti.API.info(id_selected);
 		});
+		btnDone.addEventListener('click',function(e){
+			vwPicker.top=135;
+			Ti.API.info(id_selected);
+		});
+		btnCancel2.addEventListener('click',function(e){
+			win.close();
+		});
+		
 		
 		
 		

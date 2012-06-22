@@ -64,6 +64,16 @@ App.UI.signup.style = {
 		color:'black',
 		font:{fontSize:20, fontWeight:'bold',fontFamily:'monospace'}
 	},
+	btnCancel2:{
+		height:40,
+		width:200,
+		top:10,
+		borderColor:'black',
+		borderRadius:14,
+		borderWidth:2,
+		color:'black',
+		font:{fontSize:20, fontWeight:'bold',fontFamily:'monospace'}
+	},
 	btnCategory:{
 		height:40,
 		width:200,
@@ -85,5 +95,6 @@ App.UI.signup.style = {
 	toolbar:{
 		top:0
 	}
+	
   
 };
