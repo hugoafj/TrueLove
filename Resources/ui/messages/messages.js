@@ -6,7 +6,7 @@ App.UI.messages = {
 	/**
 	 * Initializes the class
 	 **/
-	init: function(_nav) {
+	init: function(_nav,_data) {
 		
 	// INSTANTIATION
 		var style 			= App.UI.messages.style;
@@ -25,49 +25,38 @@ App.UI.messages = {
 	// CODE
 		var dataRows=[];
 			
-		var section = Titanium.UI.createTableViewSection({headerTitle:"Golden State"});
-		section.headerTitle = "Golden State";
+		var section = Titanium.UI.createTableViewSection({headerTitle:_data.topic});
+		section.headerTitle = _data.topic;
 		
-		var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
-		row.height 	= 60;
-		var label 	= Ti.UI.createLabel({text:"Scripture",font:{fontSize:18,fontWeight:"bold"}, left:6, top:7});
-		row.add(label);
-		var label 	= Ti.UI.createLabel({text:"I tell you the truth, he who hears my word, and believes him who sent me, has eternal life, and does not come into judgment, but has passed out of death and has come into life eternal.",font:{fontSize:12}, color:"gray", left:6, top:25});
-		row.add(label);
-		section.add(row);
+		if(_data.scripture && _data.scripture.length > 1){
+			var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
+			row.height 	= 60;
+			var label 	= Ti.UI.createLabel({text:"Scripture",font:{fontSize:18,fontWeight:"bold"}, left:6, top:7});
+			row.add(label);
+			var label 	= Ti.UI.createLabel({text:_data.scripture,font:{fontSize:12}, color:"gray", left:6, top:25});
+			row.add(label);
+			section.add(row);
+		}
 		
-		var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
-		row.height 	= 60;
-		var label 	= Ti.UI.createLabel({text:"Wisdom",font:{fontSize:18,fontWeight:"bold"}, left:6, top:7});
-		row.add(label);
-		var label 	= Ti.UI.createLabel({text:"I tell you the truth, he who hears my word, and believes him who sent me, has eternal life, and does not come into judgment, but has passed out of death and has come into life eternal.",font:{fontSize:12}, color:"gray", left:6, top:25});
-		row.add(label);
-		section.add(row);
+		if(_data.wisdom && _data.wisdom.length > 1){
+			var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
+			row.height 	= 60;
+			var label 	= Ti.UI.createLabel({text:"Wisdom",font:{fontSize:18,fontWeight:"bold"}, left:6, top:7});
+			row.add(label);
+			var label 	= Ti.UI.createLabel({text:_data.wisdom,font:{fontSize:12}, color:"gray", left:6, top:25});
+			row.add(label);
+			section.add(row);
+		}
 		
-		var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
-		row.height 	= 60;
-		var label 	= Ti.UI.createLabel({text:"Alcohol",font:{fontSize:18,fontWeight:"bold"}, left:6, top:7});
-		row.add(label);
-		var label 	= Ti.UI.createLabel({text:"I tell you the truth, he who hears my word, and believes him who sent me, has eternal life, and does not come into judgment, but has passed out of death and has come into life eternal.",font:{fontSize:12}, color:"gray", left:6, top:25});
-		row.add(label);
-		section.add(row);
-		
-		var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
-		row.height 	= 60;
-		var label 	= Ti.UI.createLabel({text:"Drug",font:{fontSize:18,fontWeight:"bold"}, left:6, top:7});
-		row.add(label);
-		var label 	= Ti.UI.createLabel({text:"I tell you the truth, he who hears my word, and believes him who sent me, has eternal life, and does not come into judgment, but has passed out of death and has come into life eternal.",font:{fontSize:12}, color:"gray", left:6, top:25});
-		row.add(label);
-		section.add(row);
-		
-		var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
-		row.height 	= 60;
-		var label 	= Ti.UI.createLabel({text:"Purity",font:{fontSize:18,fontWeight:"bold"}, left:6, top:7});
-		row.add(label);
-		var label 	= Ti.UI.createLabel({text:"I tell you the truth, he who hears my word, and believes him who sent me, has eternal life, and does not come into judgment, but has passed out of death and has come into life eternal.",font:{fontSize:12}, color:"gray", left:6, top:25});
-		row.add(label);
-		section.add(row);
-	
+		for(var i = 0;i < _data.application.length;i++){
+			var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
+			row.height 	= 60;
+			var label 	= Ti.UI.createLabel({text:_data.application[i].name,font:{fontSize:18,fontWeight:"bold"}, left:6, top:7});
+			row.add(label);
+			var label 	= Ti.UI.createLabel({text:_data.application[i].text,font:{fontSize:12}, color:"gray", left:6, top:25});
+			row.add(label);
+			section.add(row);
+		}
 	
 		dataRows.push(section);
 		
@@ -77,8 +66,12 @@ App.UI.messages = {
 		
 	// LISTENERS 
 	table.addEventListener("click",function(e){
-			Ti.API.info(e.index);
-			_nav.open(App.UI.message.init(_nav), {animated:true});
+			if(e.index == 0)
+				_nav.open(App.UI.message.init(_nav,_data.scripture,_data._date,"Scripture"), {animated:true});
+			else if(e.index == 1)
+				_nav.open(App.UI.message.init(_nav,_data.wisdom,_data._date,"Wisdom"), {animated:true});
+			else
+				_nav.open(App.UI.message.init(_nav,_data.application[i-2].text,_data._date,_data.application[i-2].name), {animated:true});
 		});
 		
 		return win;
