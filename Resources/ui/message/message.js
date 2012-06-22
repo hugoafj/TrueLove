@@ -135,7 +135,6 @@ App.UI.message = {
 	    	var data = {
 				link: "http://truelovefm.com/",
 				name: "Truelove.fm",
-				link:"www.google.com",
 				message: "Download the application truelove",
 				caption:_cat ,
 				picture: "http://truelove.fm/app/admin/images/logo.png",
