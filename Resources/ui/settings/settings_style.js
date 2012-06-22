@@ -49,8 +49,10 @@ App.UI.settings.style = {
 		left:10,
 		right:10,
 		height:1,
-		backgroundColor:'black',
-		top:15
+		//backgroundColor:'black',
+		setBackgroundRepeat:true,
+		top:15,
+		backgroundImage:'/images/dotedLine.png'
 	},
 	backBtn:{
 		height:24,
