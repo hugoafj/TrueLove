@@ -12,4 +12,12 @@ Ti.include(
 );
 
 
-App.UI.app.init();
+//App.UI.app.init();
+
+if(Ti.App.Properties.getString('Logged')=='true'){
+	App.UI.app.init();
+}
+else{
+	App.UI.login.init().open();
+	
+}

@@ -30,7 +30,7 @@ App.UI.signup.style = {
 		top:5,
 		font:{fontWeight:'bold'}
 	},
-	txtUser:{
+	txtEmail:{
 		height:40,
 		width:250,
 		top:5,
@@ -77,7 +77,7 @@ App.UI.signup.style = {
 	vwPicker:{
 		zIndex: 2,
 		height:251,
-		top:105
+		top:135
 	},
 	picker:{
 		top:43		

@@ -37,7 +37,7 @@ App.UI.settings.style = {
 	vwPicker:{
 		zIndex: 2,
 		height:251,
-		top:255
+		top:280
 	},
 	picker:{
 		top:43		

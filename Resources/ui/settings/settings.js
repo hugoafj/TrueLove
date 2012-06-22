@@ -72,15 +72,21 @@ App.UI.settings = {
 		
 	// LISTENERS
 	btnCategory.addEventListener('click',function(e){
-		vwPicker.top=5;
+		vwPicker.top=30;
 	});
 	btnCancel.addEventListener('click',function(e){
-			vwPicker.top=255;
+			vwPicker.top=280;
 	
 	});
 	btnDone.addEventListener('click',function(e){
-			vwPicker.top=255;
+			vwPicker.top=280;
 	});
+	btnLogout.addEventListener('click',function(e){
+			Ti.App.Properties.setString('Logged', 'false');
+			App.UI.login.init().open();
+			win.close();
+	});
+	
 		
 		return win;
 	}
