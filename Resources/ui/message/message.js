@@ -11,6 +11,7 @@ App.UI.message = {
 	// INSTANTIATION
 		var style 			= App.UI.message.style;
 		var win				= Titanium.UI.createWindow(style.win);
+		var backBtn			= Ti.UI.createButton(style.backBtn);
 		var favStar			= Ti.UI.createView(style.favStar);
 		var share			= Ti.UI.createView(style.share);
 		var date			= Ti.UI.createLabel(style.date);
@@ -33,6 +34,7 @@ App.UI.message = {
 		});
 		
 	// ADDITIONS
+		win.add(backBtn);
 		win.add(favStar);
 		win.add(share);
 		win.add(date);
@@ -148,7 +150,6 @@ App.UI.message = {
 		    	posttoFacebook();
 		    	status=1;
 	    	}
-	    	//status++;
 	    } else if (e.error) {
 	        alert(e.error);
 	    } else if (e.cancelled) {
@@ -188,6 +189,9 @@ App.UI.message = {
 		}
 		
 
+		backBtn.addEventListener("click",function(){
+			_nav.close(win, {animated:true});
+		});
 		
 		return win;
 		

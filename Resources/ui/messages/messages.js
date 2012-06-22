@@ -11,8 +11,10 @@ App.UI.messages = {
 	// INSTANTIATION
 		var style 			= App.UI.messages.style;
 		var win				= Titanium.UI.createWindow(style.win);
-		
-		var table 			= Titanium.UI.createTableView();
+		var backBtn			= Ti.UI.createButton(style.backBtn);
+		var title			= Ti.UI.createLabel(style.title);
+		var line			= Ti.UI.createView(style.line);
+		var table 			= Titanium.UI.createTableView({top:43});
 
 		
 		
@@ -20,6 +22,9 @@ App.UI.messages = {
 		
 		
 	// ADDITIONS
+		win.add(backBtn);
+		win.add(title);
+		win.add(line);
 		win.add(table);
 		
 	// CODE
@@ -78,6 +83,10 @@ App.UI.messages = {
 				_nav.open(App.UI.message.init(_nav,_data.wisdom,_data._date,"Wisdom"), {animated:true});
 			else
 				_nav.open(App.UI.message.init(_nav,_data.application[0].text,_data._date,_data.application[0].name), {animated:true});
+		});
+		
+		backBtn.addEventListener("click",function(){
+			_nav.close(win, {animated:true});
 		});
 		
 		return win;
