@@ -6,7 +6,7 @@ App.UI.message = {
 	/**
 	 * Initializes the class
 	 **/
-	init: function(_nav) {
+	init: function(_nav,_text,_date,_cat) {
 		
 	// INSTANTIATION
 		var style 			= App.UI.message.style;
@@ -24,7 +24,12 @@ App.UI.message = {
 		Titanium.Facebook.permissions = ['publish_stream', 'read_stream'];
 		
 	// STYLING
-		
+		TL.merge(type,{
+			text:_cat
+		});
+		TL.merge(txtMsg,{
+			text:_text
+		});
 		
 	// ADDITIONS
 		win.add(favStar);
@@ -38,6 +43,33 @@ App.UI.message = {
 		Ti.API.info(txtMsg);
 		
 	// CODE
+		var months=[];
+		months.push({month:"January"});
+		months.push({month:"February"});
+		months.push({month:"March"});
+		months.push({month:"April"});
+		months.push({month:"May"});
+		months.push({month:"June"});
+		months.push({month:"July"});
+		months.push({month:"August"});
+		months.push({month:"September"});
+		months.push({month:"October"});
+		months.push({month:"November"});
+		months.push({month:"December"});
+		
+		var arrDate = _date.split("-");
+		
+		if(parseInt(arrDate[1]) > 00)
+			var m = months[parseInt(arrDate[1])].month
+		else
+			var m = "-------";
+			
+		TL.merge(date,{
+			text:m+" "+arrDate[2]
+		});
+		
+	
+	
 		function showRequestResult(e) {
 			var s = '';
 			if (e.success) {
@@ -61,6 +93,8 @@ App.UI.message = {
 			}
 			alert(s);
 		}
+
+		
 		
 	// LISTENERS 
 	share.addEventListener('click', function() {
