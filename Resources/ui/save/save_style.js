@@ -10,5 +10,17 @@ App.UI.save.style = {
 	    backgroundColor:'white',
 	    navBarHidden:true,
 	    top:0
-	}	
+	},
+	title:{
+		text:'Favorites',
+		top:10,
+		font:{fontSize:18,fontWeight:"bold"}
+	},
+	line:{
+		backgroundColor:"black",
+		height:1,
+		left:10,
+		right:13,
+		top:36
+	}
 };

@@ -15,7 +15,9 @@ App.UI.save = {
 		var nav = Titanium.UI.iPhone.createNavigationGroup({
 		   window: win_favs
 		});
-		var table 			= Titanium.UI.createTableView();
+		var title			= Ti.UI.createLabel(style.title);
+		var line			= Ti.UI.createView(style.line);
+		var table 			= Titanium.UI.createTableView({top:43});
 
 		
 		
@@ -23,6 +25,8 @@ App.UI.save = {
 		
 		
 	// ADDITIONS
+		win_favs.add(title);
+		win_favs.add(line);
 		win_favs.add(table);
 		win.add(nav);
 		
@@ -43,8 +47,8 @@ App.UI.save = {
 		
 		var dataRows=[];
 			
-		var section = Titanium.UI.createTableViewSection({headerTitle:"Favorites"});
-		section.headerTitle = "Favorites";
+		var section = Titanium.UI.createTableViewSection();
+		//section.headerTitle = "Favorites";
 		
 		var arrResult = App.API.DB.getMessages(Ti.App.Properties.getInt('idUser'),function(_result){
 		
@@ -83,7 +87,6 @@ App.UI.save = {
 			nav.open(App.UI.message.init(nav,arrResult[e.index].text,arrResult[e.index].date,arrResult[e.index].cat), {animated:true});
 		});
 		
-	
 		
 		return win;
 	}

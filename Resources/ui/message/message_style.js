@@ -10,19 +10,31 @@ App.UI.message.style = {
 	    backgroundColor:'white',
 	    navBarHidden:true,
 	},
+	backBtn:{
+		height:24,
+		width:70,
+		top:8,
+		left:10,
+		borderColor:'black',
+		borderRadius:14,
+		borderWidth:2,
+		color:'black',
+		font:{fontSize:15, fontWeight:'bold',fontFamily:'monospace'},
+		title:"< back"
+	},
 	favStar:{
 		backgroundImage:'/images/favStar.png',
 		width:21,
 		height:19,
 		top:10,
-		left:10
+		left:95
 	},
 	share:{
 		backgroundImage:'/images/share.png',
 		width:23,
 		height:18,
 		top:10,
-		left:52
+		left:204
 	},
 	date:{
 		//text:'Nomember 28',

@@ -11,6 +11,7 @@ App.UI.message = {
 	// INSTANTIATION
 		var style 			= App.UI.message.style;
 		var win				= Titanium.UI.createWindow(style.win);
+		var backBtn			= Ti.UI.createButton(style.backBtn);
 		var favStar			= Ti.UI.createView(style.favStar);
 		var share			= Ti.UI.createView(style.share);
 		var date			= Ti.UI.createLabel(style.date);
@@ -32,6 +33,7 @@ App.UI.message = {
 		});
 		
 	// ADDITIONS
+		win.add(backBtn);
 		win.add(favStar);
 		win.add(share);
 		win.add(date);
@@ -167,6 +169,9 @@ App.UI.message = {
 				alert("Please try again");
 		})
 
+		backBtn.addEventListener("click",function(){
+			_nav.close(win, {animated:true});
+		});
 		
 		return win;
 	}

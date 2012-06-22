@@ -87,7 +87,7 @@ App.UI.messages = {
 		
 		backBtn.addEventListener("click",function(){
 			_nav.close(win, {animated:true});
-		})
+		});
 		
 		return win;
 	}
