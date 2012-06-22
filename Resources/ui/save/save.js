@@ -10,8 +10,11 @@ App.UI.save = {
 		
 	// INSTANTIATION
 		var style 			= App.UI.save.style;
-		var win				= Titanium.UI.createWindow(style.win);
-		
+		var win 			= Titanium.UI.createWindow({height:370,top:0});
+		var win_favs		= Titanium.UI.createWindow(style.win);
+		var nav = Titanium.UI.iPhone.createNavigationGroup({
+		   window: win_favs
+		});
 		var table 			= Titanium.UI.createTableView();
 
 		
@@ -20,46 +23,48 @@ App.UI.save = {
 		
 		
 	// ADDITIONS
-		win.add(table);
+		win_favs.add(table);
+		win.add(nav);
 		
 	// CODE
+		var months=[];
+		months.push({month:"January"});
+		months.push({month:"February"});
+		months.push({month:"March"});
+		months.push({month:"April"});
+		months.push({month:"May"});
+		months.push({month:"June"});
+		months.push({month:"July"});
+		months.push({month:"August"});
+		months.push({month:"September"});
+		months.push({month:"October"});
+		months.push({month:"November"});
+		months.push({month:"December"});
+		
 		var dataRows=[];
 			
 		var section = Titanium.UI.createTableViewSection({headerTitle:"Favorites"});
 		section.headerTitle = "Favorites";
 		
-		var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
-		row.height 	= 60;
-		var label 	= Ti.UI.createLabel({text:"November 8, Scripture",font:{fontSize:18,fontWeight:"bold"}, left:6, top:7});
-		row.add(label);
-		var label 	= Ti.UI.createLabel({text:"I tell you the truth, he who hears my word, and believes him who sent me, has eternal life, and does not come into judgment, but has passed out of death and has come into life eternal.",font:{fontSize:12}, color:"gray", left:6, top:25});
-		row.add(label);
-		section.add(row);
+		var arrResult = App.API.DB.getMessages(Ti.App.Properties.getInt('idUser'),function(_result){
 		
-		var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
-		row.height 	= 60;
-		var label 	= Ti.UI.createLabel({text:"November 8, Wisdom",font:{fontSize:18,fontWeight:"bold"}, left:6, top:7});
-		row.add(label);
-		var label 	= Ti.UI.createLabel({text:"I tell you the truth, he who hears my word, and believes him who sent me, has eternal life, and does not come into judgment, but has passed out of death and has come into life eternal.",font:{fontSize:12}, color:"gray", left:6, top:25});
-		row.add(label);
-		section.add(row);
+			for(var i = 0;i < _result.length;i++){
+				var arrDate = _result[i].date.split("-");
 		
-		var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
-		row.height 	= 60;
-		var label 	= Ti.UI.createLabel({text:"June 23, Alcohol",font:{fontSize:18,fontWeight:"bold"}, left:6, top:7});
-		row.add(label);
-		var label 	= Ti.UI.createLabel({text:"I tell you the truth, he who hears my word, and believes him who sent me, has eternal life, and does not come into judgment, but has passed out of death and has come into life eternal.",font:{fontSize:12}, color:"gray", left:6, top:25});
-		row.add(label);
-		section.add(row);
-		
-		var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
-		row.height 	= 60;
-		var label 	= Ti.UI.createLabel({text:"June 7, Drug",font:{fontSize:18,fontWeight:"bold"}, left:6, top:7});
-		row.add(label);
-		var label 	= Ti.UI.createLabel({text:"I tell you the truth, he who hears my word, and believes him who sent me, has eternal life, and does not come into judgment, but has passed out of death and has come into life eternal.",font:{fontSize:12}, color:"gray", left:6, top:25});
-		row.add(label);
-		section.add(row);
-	
+				if(parseInt(arrDate[1]) > 00)
+					var m = months[parseInt(arrDate[1])].month+" "+arrDate[2]+", "+_result[i].cat;
+				else
+					var m = "------- --"+", "+_result[i].cat;;
+				var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
+				row.height 	= 60;
+				var label 	= Ti.UI.createLabel({text:m,font:{fontSize:18,fontWeight:"bold"}, left:6, top:7});
+				row.add(label);
+				var label 	= Ti.UI.createLabel({text:_result[i].text,font:{fontSize:12}, color:"gray", left:6, top:25});
+				row.add(label);
+				section.add(row);
+			}
+		});
+
 	
 		dataRows.push(section);
 		
@@ -68,6 +73,17 @@ App.UI.save = {
 		table.setData(dataRows);
 		
 	// LISTENERS
+		table.addEventListener("click",function(e){
+			App.UI.menu.flag='1';
+			App.UI.menu.tempWin.animate({height:430,duration:50});
+			TL.merge(App.UI.menu.vwOpenClose,{
+					backgroundImage:'/images/arrowOpen.png'
+				});
+			App.UI.menu.win.animate({bottom:-60,duration:50});
+			nav.open(App.UI.message.init(nav,arrResult[e.index].text,arrResult[e.index].date,arrResult[e.index].cat), {animated:true});
+		});
+		
+	
 		
 		return win;
 	}

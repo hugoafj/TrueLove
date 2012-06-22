@@ -88,7 +88,8 @@ App.UI.login = {
         				}
         				else{
         					Ti.App.Properties.setString('Logged', 'true');
-        					Ti.App.Properties.setString('_cat',data.cat.toString());
+        					Ti.App.Properties.setInt('Category',data.cat);
+        					Ti.App.Properties.setInt('idUser',data.id);
         					App.UI.app.init();
         					win.close();
         				}

@@ -97,20 +97,33 @@ App.UI.message = {
 		
 		
 	// LISTENERS 
-	share.addEventListener('click', function() {
-	Ti.Facebook.authorize();
-	var data = {
-		link: "https://developer.mozilla.org/en/JavaScript",
-		name: "Best online Javascript reference",
-		message: "Use Mozilla's online Javascript reference",
-		caption: "MDN Javascript Reference",
-		picture: "http://truelove.fm/app/admin/images/logo.png",
-		description: "This section of the site is dedicated to JavaScript-the-language, the parts that are not specific to web pages or other host environments...",
-		test: [ {foo:'Encoding test', bar:'Durp durp'}, 'test' ]
-	};
-	Titanium.Facebook.requestWithGraphPath('me/feed', data, 'POST', showRequestResult);
-});
-	
+		share.addEventListener('click', function() {
+			Ti.Facebook.authorize();
+			var data = {
+				link: "https://developer.mozilla.org/en/JavaScript",
+				name: "Best online Javascript reference",
+				message: "Use Mozilla's online Javascript reference",
+				caption: "MDN Javascript Reference",
+				picture: "http://truelove.fm/app/admin/images/logo.png",
+				description: "This section of the site is dedicated to JavaScript-the-language, the parts that are not specific to web pages or other host environments...",
+				test: [ {foo:'Encoding test', bar:'Durp durp'}, 'test' ]
+			};
+			Titanium.Facebook.requestWithGraphPath('me/feed', data, 'POST', showRequestResult);
+		});
+		
+		favStar.addEventListener("click",function(){
+			var insert = {
+				id_user:Ti.App.Properties.getInt('idUser'),
+				cat:_cat,
+				text:_text,
+				date:_date
+			};
+			var lastID=App.API.DB.insertRecord(insert,function(){});
+			if(lastID > 0)
+				alert("Message save into Favorites");
+			else
+				alert("Please try again");
+		})
 		
 		return win;
 	}

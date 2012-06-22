@@ -152,6 +152,7 @@ App.UI.signup = {
         					if (data.result>0){
         					Ti.App.Properties.setString('Logged', 'true');
         					Ti.App.Properties.setInt('Category',id_selected);
+        					Ti.App.Properties.setInt('idUser',data.result);
         					alert('User was created successfully');
         					App.UI.app.init();
         					win.close();
