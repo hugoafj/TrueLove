@@ -82,7 +82,7 @@ App.UI.calendar = {
 		// Handle the XML data.
 		//this.responseXML.documentElement;
 		//Ti.API.info(this.responseText);
-		Ti.API.info(JSON.parse(this.responseText));
+		//Ti.API.info(JSON.parse(this.responseText));
 	}
 	anXhr.onerror = function() {
 		alert('The HTTP request failedw');

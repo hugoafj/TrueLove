@@ -18,7 +18,7 @@ App.UI.login = {
 		var lblUser			= Ti.UI.createLabel(style.lblUser);
 		var lblPass			= Ti.UI.createLabel(style.lblPass);
 		var btnSignup		= Ti.UI.createButton(style.btnSignup);
-		
+		var mycat;
 				
 		// STYLING
 		
@@ -35,7 +35,8 @@ App.UI.login = {
 			borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 			//textAlign:Titanium.UI.TEXT_ALIGNMENT_CENTER,
 			hintText:'Password',
-			autocorrect:false
+			autocorrect:false,
+			passwordMask:true
 		});
 		TL.merge(btnLogin, {
 			title:'Log In'
@@ -65,33 +66,45 @@ App.UI.login = {
 			Ti.API.info('btnLogin');
 			var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 			
-			if(txtUser.value==''|| txtPass==''){
+			if(txtUser.value==''|| txtPass.value==''){
 				alert('You are missing to add some fields');
 			}else if(!filter.test(txtUser.value)){
 				alert('Please provide a valid email address');
 			}else{
 			
 				var data = {
-    				email: 'Pepe@pepe.com',
-    				pass:'pepe2'    				
+    				email: txtUser.value,
+    				pass:txtPass.value   				
 				};
  
 				var xhr = Ti.Network.createHTTPClient({
     				onload: function() {
         			// handle the response
-        				Ti.API.info(this.responseText);
+        				var data = JSON.parse(this.responseText);
+        				mycat=(data.cat).toString();
+        				
+        				if (data.result=='0'){
+        					alert('There was an error');
+        				}
+        				else{
+        					Ti.App.Properties.setString('Logged', 'true');
+        					Ti.App.Properties.setString('_cat',data.cat.toString());
+        					App.UI.app.init();
+        					win.close();
+        				}
     				}
 				});
  
 				xhr.open('POST','http://www.truelove.fm/app/admin/setLogin.php');
 				// optional:
 				// blogPost = JSON.stringify(blogPost);
-				xhr.send(data);
-				
-				
-				
+				xhr.send(data);				
 			}
-			
+			//Ti.APP.Properties.setString('_cat','mycat');
+			//Ti.API.info('¡¡¡¡¡¡¡¡¡'+Ti.App.Properties.getString('_cat'));
+		});
+		btnSignup.addEventListener('click',function(e){
+			App.UI.signup.init().open();
 		});
 		
 		return win

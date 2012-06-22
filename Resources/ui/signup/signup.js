@@ -12,7 +12,7 @@ App.UI.signup = {
 		
 		var style 			= App.UI.signup.style;
 		var win				= Ti.UI.createWindow(style.win);
-		var txtUser			= Ti.UI.createTextField(style.txtUser);
+		var txtEmail		= Ti.UI.createTextField(style.txtEmail);
 		var txtPass			= Ti.UI.createTextField(style.txtPass);
 		var txtName			= Ti.UI.createTextField(style.txtName);
 		var btnSignup		= Ti.UI.createButton(style.btnSignup);
@@ -21,7 +21,7 @@ App.UI.signup = {
 		var lblUser			= Ti.UI.createLabel(style.lblUser);
 		var lblPass			= Ti.UI.createLabel(style.lblPass);
 		
-		
+		var id_selected		= 0;
 		var vwPicker 		= Titanium.UI.createView(style.vwPicker);
 		var pickerValue;
 	
@@ -55,7 +55,7 @@ App.UI.signup = {
 			hintText:'Full Name',
 			autocorrect:false
 		});
-		TL.merge(txtUser, {
+		TL.merge(txtEmail, {
 			borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 			//textAlign:Titanium.UI.TEXT_ALIGNMENT_CENTER,
 			hintText:'E-mail',
@@ -65,10 +65,11 @@ App.UI.signup = {
 			borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 			//textAlign:Titanium.UI.TEXT_ALIGNMENT_CENTER,
 			hintText:'Password',
+			passwordMask:true,
 			autocorrect:false
 		});
 		TL.merge(btnSignup, {
-			title:'Sign Up'
+			title:'Register'
 		});
 		TL.merge(btnCategory, {
 			title:'Select Category'
@@ -77,7 +78,7 @@ App.UI.signup = {
 			text:'Email:'
 		});
 		TL.merge(lblPass, {
-			text:'Password:'
+			text:'Password:'			
 		});
 		TL.merge(lblName, {
 			text:'Full Name:'
@@ -94,15 +95,17 @@ App.UI.signup = {
    	 				TL.merge(picker, {
 						selectionIndicator:true
 					});
-   	 				Ti.API.info(this.responseText);
+   	 				//Ti.API.info(this.responseText);
    	 				var data = JSON.parse(this.responseText);
    	 				for(var i=0;i<data.length;i++){
-   	 					picker.add(Ti.UI.createPickerRow({title: data[i].name}));
+   	 					picker.add(Ti.UI.createPickerRow({title: data[i].name, idCat:data[i].id}));
    	 				}
    	 				//picker.remove(tempPick);
    	 				vwPicker.add(picker);
-   	 				
+   	 				id_selected = data[0].id;
    	 				picker.addEventListener('change',function(e){
+   	 					id_selected = e.row.idCat;
+   	 					//Ti.API.info(id_selected);
    	 					pickerValue=e.selectedValue;
    	 				});
    	 				
@@ -119,7 +122,7 @@ App.UI.signup = {
 		win.add(lblName);
 		win.add(txtName);
 		win.add(lblUser);
-		win.add(txtUser);
+		win.add(txtEmail);
 		win.add(lblPass)
 		win.add(txtPass);
 		win.add(btnCategory);
@@ -129,23 +132,39 @@ App.UI.signup = {
 		btnSignup.addEventListener('click',function(e){
 			var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 			
-			if(txtUser.value==''|| txtPass=='' || txtName==''){
+			if(txtEmail.value==''|| txtPass.value=='' || txtName.value==''){
 				alert('You are missing to add some fields');
-			}else if(!filter.test(txtUser.value)){
+			}else if(!filter.test(txtEmail.value)){
 				alert('Please provide a valid email address');
 			}else{
 				
 				var data = {
-    				name: 'Pepe',
-    				email: 'Pepe@pepe.com',
-    				pass:'pepe',
-    				cat:'11'
+    				name:txtName.value,
+    				email:txtEmail.value,
+    				pass:txtPass.value,
+    				cat:id_selected
 				};
- 
+ 				//Ti.API.info(data);
+ 				
 				var xhr = Ti.Network.createHTTPClient({
     				onload: function() {
+    					var data = JSON.parse(this.responseText);
+        					if (data.result>0){
+        					Ti.App.Properties.setString('Logged', 'true');
+        					Ti.App.Properties.setInt('Category',id_selected);
+        					alert('User was created successfully');
+        					App.UI.app.init();
+        					win.close();
+        					
+        				}
+        				else{
+        					alert('There was an error\n creating an user');
+        				}
+    								
+    					
+    					
         			// handle the response
-        				Ti.API.info(this.responseText);
+        				//Ti.API.info(this.responseText);
     				}
 				});
  
@@ -153,6 +172,7 @@ App.UI.signup = {
 				// optional:
 				// blogPost = JSON.stringify(blogPost);
 				xhr.send(data);
+				
 			}
 		});
 		btnCategory.addEventListener('click',function(e){
@@ -162,12 +182,12 @@ App.UI.signup = {
 			
 		});
 		btnCancel.addEventListener('click',function(e){
-			vwPicker.top=105;
+			vwPicker.top=135;
 	
 		});
 		btnDone.addEventListener('click',function(e){
-			vwPicker.top=105;
-			
+			vwPicker.top=135;
+			Ti.API.info(id_selected);
 		});
 		
 		
