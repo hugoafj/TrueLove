@@ -65,13 +65,19 @@ App.UI.messages = {
 		table.setData(dataRows);
 		
 	// LISTENERS 
-	table.addEventListener("click",function(e){
+		table.addEventListener("click",function(e){
+			App.UI.menu.flag='1';
+			App.UI.menu.tempWin.animate({height:430,duration:50});
+			TL.merge(App.UI.menu.vwOpenClose,{
+					backgroundImage:'/images/arrowOpen.png'
+				});
+			App.UI.menu.win.animate({bottom:-60,duration:50});
 			if(e.index == 0)
 				_nav.open(App.UI.message.init(_nav,_data.scripture,_data._date,"Scripture"), {animated:true});
 			else if(e.index == 1)
 				_nav.open(App.UI.message.init(_nav,_data.wisdom,_data._date,"Wisdom"), {animated:true});
 			else
-				_nav.open(App.UI.message.init(_nav,_data.application[i-2].text,_data._date,_data.application[i-2].name), {animated:true});
+				_nav.open(App.UI.message.init(_nav,_data.application[0].text,_data._date,_data.application[0].name), {animated:true});
 		});
 		
 		return win;

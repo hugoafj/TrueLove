@@ -10,14 +10,14 @@ App.UI.menu = {
 		
 		// INSTANTIATION
 		var style 			= App.UI.menu.style;
-		var win				= Ti.UI.createWindow(style.win);
-		var tempWin;
+		App.UI.menu.win		= Ti.UI.createWindow(style.win);
+		App.UI.menu.tempWin;
 		
 		var vwContainer		= Ti.UI.createView(style.vwContainer);
 		var vwImage			= Ti.UI.createView(style.vwImage);
 		var vwLine			= Ti.UI.createView(style.vwLine);
 		var vwImageLogo		= Ti.UI.createView(style.vwImageLogo);
-		var vwOpenClose		= Ti.UI.createView(style.vwOpenClose);
+		App.UI.menu.vwOpenClose		= Ti.UI.createView(style.vwOpenClose);
 		
 		var vmtrueloveFm	= Ti.UI.createView(style.vmtrueloveFm);
 		var vwSettings		= Ti.UI.createView(style.vwSettings);
@@ -29,7 +29,7 @@ App.UI.menu = {
 		var lblSettings		= Ti.UI.createLabel(style.lblSettings);
 		var lblFavorites    = Ti.UI.createLabel(style.lblFavorites);
 		
-		var flag='0';
+		App.UI.menu.flag='0';
 	
 		// STYLING
 		TL.merge(lbltrueLove,{
@@ -56,36 +56,36 @@ App.UI.menu = {
 		vwContainer.add(vwImage);
 		vwImage.add(vwImageLogo);
 		vwImage.add(vwLine);
-		vwImage.add(vwOpenClose);
+		vwImage.add(App.UI.menu.vwOpenClose);
 		vwContainer.add(vmtrueloveFm);
 		vwContainer.add(vwSettings);
 		vwContainer.add(vwCalendar);
 		vwContainer.add(vwFavorites);
 		
-		win.add(vwContainer);
+		App.UI.menu.win.add(vwContainer);
 				
 		// CODE
 		
 		// LISTENERS
 		vwImage.addEventListener('click',function(e){
 			
-			if(flag=='0'){
+			if(App.UI.menu.flag=='0'){
 				
-				win.animate({bottom:-60,duration:50});
-				tempWin.animate({height:430,duration:50});
+				App.UI.menu.win.animate({bottom:-60,duration:50});
+				App.UI.menu.tempWin.animate({height:430,duration:50});
 				
-				TL.merge(vwOpenClose,{
+				TL.merge(App.UI.menu.vwOpenClose,{
 					backgroundImage:'/images/arrowOpen.png'
 				});
 				
-				flag='1'
+				App.UI.menu.flag='1'
 			}
 			else{
-				flag='0';
-				win.animate({bottom:0,duration:100});
-				tempWin.animate({height:370,duration:100});
+				App.UI.menu.flag='0';
+				App.UI.menu.win.animate({bottom:0,duration:100});
+				App.UI.menu.tempWin.animate({height:370,duration:100});
 				
-				TL.merge(vwOpenClose,{
+				TL.merge(App.UI.menu.vwOpenClose,{
 					backgroundImage:'/images/arrowClose.png'
 				});
 			}
@@ -94,74 +94,74 @@ App.UI.menu = {
 		vmtrueloveFm.addEventListener('click',function(e){
 			//alert('vmtrueloveFm');
 			
-			tempWin.close();
-			tempWin = App.UI.webpage.init();
-			tempWin.open();
+			App.UI.menu.tempWin.close();
+			App.UI.menu.tempWin = App.UI.webpage.init();
+			App.UI.menu.tempWin.open();
 			
-			win.animate({bottom:-60,duration:50});
-			tempWin.animate({height:430,duration:50});
+			App.UI.menu.win.animate({bottom:-60,duration:50});
+			App.UI.menu.tempWin.animate({height:430,duration:50});
 			
-			TL.merge(vwOpenClose,{
+			TL.merge(App.UI.menu.vwOpenClose,{
 					backgroundImage:'/images/arrowOpen.png'
 				});
 			
-			flag='1'
+			App.UI.menu.flag='1'
 		});
 		vwSettings.addEventListener('click',function(e){
 			//alert('vwSettings');
 			
-			tempWin.close();
-			tempWin = App.UI.settings.init();
-			tempWin.open();
+			App.UI.menu.tempWin.close();
+			App.UI.menu.tempWin = App.UI.settings.init();
+			App.UI.menu.tempWin.open();
 			
-			win.animate({bottom:-60,duration:50});
-			tempWin.animate({height:430,duration:50});
+			App.UI.menu.win.animate({bottom:-60,duration:50});
+			App.UI.menu.tempWin.animate({height:430,duration:50});
 			
-			TL.merge(vwOpenClose,{
+			TL.merge(App.UI.menu.vwOpenClose,{
 					backgroundImage:'/images/arrowOpen.png'
 				});
 			
-			flag='1'
+			App.UI.menu.flag='1'
 		});
 		vwCalendar.addEventListener('click',function(e){
 			//alert('vwCalendar');
 			
-			tempWin.close();
-			tempWin = App.UI.calendar.init();
-			tempWin.open();
+			App.UI.menu.tempWin.close();
+			App.UI.menu.tempWin = App.UI.calendar.init();
+			App.UI.menu.tempWin.open();
 			
-			win.animate({bottom:-60,duration:50});
-			tempWin.animate({height:430,duration:50});
+			App.UI.menu.win.animate({bottom:-60,duration:50});
+			App.UI.menu.tempWin.animate({height:430,duration:50});
 			
-			TL.merge(vwOpenClose,{
+			TL.merge(App.UI.menu.vwOpenClose,{
 					backgroundImage:'/images/arrowOpen.png'
 				});
 			
-			flag='1'
+			App.UI.menu.flag='1'
 		});
 		vwFavorites.addEventListener('click',function(e){
 			//alert('vwFavorites');
 			
-			tempWin.close();
-			tempWin = App.UI.save.init();
-			tempWin.open();
+			App.UI.menu.tempWin.close();
+			App.UI.menu.tempWin = App.UI.save.init();
+			App.UI.menu.tempWin.open();
 			
-			win.animate({bottom:-60,duration:50});
-			tempWin.animate({height:430,duration:50});
+			App.UI.menu.win.animate({bottom:-60,duration:50});
+			App.UI.menu.tempWin.animate({height:430,duration:50});
 			
-			TL.merge(vwOpenClose,{
+			TL.merge(App.UI.menu.vwOpenClose,{
 					backgroundImage:'/images/arrowOpen.png'
 				});
 			
-			flag='1'
+			App.UI.menu.flag='1'
 		});
 		
-		tempWin = App.UI.calendar.init();
-		tempWin.open();
-		win.animate({bottom:-60,duration:0});
-		tempWin.animate({height:430,duration:0});
-		flag='1'
-		return win;
+		App.UI.menu.tempWin = App.UI.calendar.init();
+		App.UI.menu.tempWin.open();
+		App.UI.menu.win.animate({bottom:-60,duration:0});
+		App.UI.menu.tempWin.animate({height:430,duration:0});
+		App.UI.menu.flag='1'
+		return App.UI.menu.win;
 
 		
 		

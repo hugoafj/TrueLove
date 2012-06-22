@@ -122,6 +122,7 @@ App.UI.message = {
 		
 		
 	// LISTENERS 
+
 	share.addEventListener('click', function() {
 		
 		aTableView.top=250;
@@ -152,6 +153,21 @@ App.UI.message = {
 	    }
 	});
 	
+
+		favStar.addEventListener("click",function(){
+			var insert = {
+				id_user:Ti.App.Properties.getInt('idUser'),
+				cat:_cat,
+				text:_text,
+				date:_date
+			};
+			var lastID=App.API.DB.insertRecord(insert,function(){});
+			if(lastID > 0)
+				alert("Message save into Favorites");
+			else
+				alert("Please try again");
+		})
+
 		
 		return win;
 	}

@@ -92,15 +92,23 @@ App.UI.calendar = {
 		anXhr.onerror = function() {
 			alert('The HTTP request failedw');
 		}
-		
+		var data = {
+			cat: Ti.App.Properties.getInt('Category')
+		};
 		// Send the request data.
-		anXhr.open('GET','http://www.truelove.fm/app/admin/getMessages.php');
-		anXhr.send();
+		anXhr.open('POST','http://www.truelove.fm/app/admin/getMessages.php');
+		anXhr.send(data);
 			
 		
 	// LISTENERS
 		table.addEventListener("click",function(e){
 			//Ti.API.info(data[e.index].application);
+			App.UI.menu.flag='1';
+			App.UI.menu.tempWin.animate({height:430,duration:50});
+			App.UI.menu.win.animate({bottom:-60,duration:50});
+			TL.merge(App.UI.menu.vwOpenClose,{
+					backgroundImage:'/images/arrowOpen.png'
+				});
 			nav.open(App.UI.messages.init(nav,data[e.index]), {animated:true});
 		});
 			
