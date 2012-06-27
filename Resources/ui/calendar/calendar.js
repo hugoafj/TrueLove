@@ -61,7 +61,7 @@ App.UI.calendar = {
 				var arrDate = data[i]._date.split("-");
 				//Ti.API.info(JSON.stringify(arrDate));
 				if(parseInt(arrDate[1]) > 00)
-					var m = months[parseInt(arrDate[1])].month
+					var m = months[parseInt(arrDate[1])-1].month
 				else
 					var m = "-------";
 				
@@ -78,7 +78,7 @@ App.UI.calendar = {
 				row.height 	= 60;
 				var label 	= Ti.UI.createLabel({text:arrDate[2],font:{fontSize:40}, color:"white", left:3, backgroundColor:"gray", width:50, textAlign:"center"});
 				row.add(label);
-				var label 	= Ti.UI.createLabel({text:data[i].topic,font:{fontSize:18,fontWeight:"bold"}, left:60, top:7});
+				var label 	= Ti.UI.createLabel({text:data[i].topic,font:{fontSize:18,fontWeight:"bold"}, left:60, top:7, height:25});
 				row.add(label);
 				var label 	= Ti.UI.createLabel({text:data[i].scripture,font:{fontSize:12}, color:"gray", left:60, top:25});
 				row.add(label);
@@ -90,7 +90,7 @@ App.UI.calendar = {
 			
 		}
 		anXhr.onerror = function() {
-			alert('The HTTP request failedw');
+			alert('The HTTP request failed');
 		}
 		var data = {
 			cat: Ti.App.Properties.getInt('Category')

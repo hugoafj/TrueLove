@@ -92,7 +92,7 @@ App.UI.message = {
 		var arrDate = _date.split("-");
 		
 		if(parseInt(arrDate[1]) > 00)
-			var m = months[parseInt(arrDate[1])].month
+			var m = months[parseInt(arrDate[1])-1].month
 		else
 			var m = "-------";
 			

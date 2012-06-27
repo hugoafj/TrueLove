@@ -32,4 +32,6 @@ Ti.include(
 	DIR + "ui/message/message.js",
 	DIR + "ui/message/message_style.js"
 	
+	//DIR + "urbanairship/urbanairship.js"
+	
 );
