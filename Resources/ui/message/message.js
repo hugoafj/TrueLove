@@ -9,7 +9,6 @@ App.UI.message = {
 	//init: function(_nav,_text,_date,_cat) {
 	init: function(_nav,_text) {
 		
-		Ti.API.info(JSON.stringify(_text));
 	// INSTANTIATION
 		var style 			= App.UI.message.style;
 		var win				= Titanium.UI.createWindow(style.win);
@@ -38,8 +37,11 @@ App.UI.message = {
 			
 			if(Ti.App.Properties.getString('fromwin')=='calendar'){
 				
+	
 				for(var i = 0;i < _text.application.length;i++){
 					if(_text.application>0){
+						
+						alert('si entra');
 						mytextApplication='_______________________________'+'\n'+'\n'+_text.application[0].text;
 						
 					}
@@ -49,13 +51,13 @@ App.UI.message = {
 			if(Ti.App.Properties.getString('fromwin')=='favorites'){
 				Ti.API.info(JSON.stringify(_text));
 				x=_text.text;
+				
+		Ti.API.info(JSON.stringify(_text));
 			}	
 				
 			
 		
-		TL.merge(txtMsg,{
-			text:x
-		});
+		
 		
 	// ADDITIONS
 		//win.add(backBtn);
