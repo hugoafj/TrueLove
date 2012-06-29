@@ -8,6 +8,8 @@ App.UI.message = {
 	 **/
 	//init: function(_nav,_text,_date,_cat) {
 	init: function(_nav,_text) {
+		
+		Ti.API.info(JSON.stringify(_text));
 	// INSTANTIATION
 		var style 			= App.UI.message.style;
 		var win				= Titanium.UI.createWindow(style.win);
@@ -22,6 +24,8 @@ App.UI.message = {
 		var login 			= Ti.Facebook.createLoginButton(style.login);
 		var status=0;
 		var shareStatus=0;
+		var mytextApplication="";
+		var x="";
 		
 		Titanium.Facebook.appid = "404794309570960";
 		Titanium.Facebook.permissions = ['publish_stream', 'read_stream'];
@@ -30,8 +34,27 @@ App.UI.message = {
 		//TL.merge(type,{
 			//text:_cat
 		//});
+	
+			
+			if(Ti.App.Properties.getString('fromwin')=='calendar'){
+				if(_text.application){
+					for(var i = 0;i < _text.application.length;i++){
+						if(_text.application.length>0)
+						mytextApplication='_______________________________'+'\n'+'\n'+_text.application[0].text;
+						
+					}
+				}
+				x=_text.scripture+'\n'+'_______________________________'+'\n'+'\n'+_text.wisdom+'\n'+mytextApplication
+			}
+			if(Ti.App.Properties.getString('fromwin')=='favorites'){
+				Ti.API.info(JSON.stringify(_text));
+				x=_text.text;
+			}	
+				
+			
+		
 		TL.merge(txtMsg,{
-			text:_text.scripture+'\n'+'______________________________'+'\n'+'\n'+_text.wisdom+'\n'+'______________________________'+'\n'+'\n'+_text.application
+			text:x
 		});
 		
 	// ADDITIONS
@@ -44,7 +67,7 @@ App.UI.message = {
 		win.add(scvMsg);
 		scvMsg.add(txtMsg);
 		
-		Ti.API.info(txtMsg);
+		//Ti.API.info(txtMsg);
 		
 	// CODE
 			
@@ -173,8 +196,8 @@ App.UI.message = {
 		favStar.addEventListener("click",function(){
 			var insert = {
 				id_user:Ti.App.Properties.getInt('idUser'),
-				//cat:_cat,
-				text:_text,
+				
+				text:txtMsg.text,
 				date:_text._date
 			};
 			var lastID=App.API.DB.insertRecord(insert,function(){});

@@ -80,7 +80,7 @@ App.UI.calendar = {
 						tempSection.headerTitle = myDate;
 					}
 					
-					var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
+					var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true,myIndex:i});
 					row.height 	= 60;
 					var label 	= Ti.UI.createLabel({text:arrDate[2],font:{fontSize:40}, color:"white", left:3, backgroundColor:"gray", width:50, textAlign:"center"});
 					row.add(label);
@@ -116,9 +116,13 @@ App.UI.calendar = {
 			TL.merge(App.UI.menu.vwOpenClose,{
 					backgroundImage:'/images/arrowOpen.png'
 				});
-			App.UI.menu.tempWin = App.UI.message.init(nav,data[e.index]);
+			App.UI.menu.tempWin = App.UI.message.init(nav,data[e.row.myIndex]);
 			App.UI.menu.windows.push({win:App.UI.menu.tempWin,nav:nav});
+			//nav.open(App.UI.menu.tempWin,{animated:true});
+			
+			Ti.App.Properties.setString('fromwin', 'calendar');
 			nav.open(App.UI.menu.tempWin,{animated:true});
+			//nav.open(App.UI.message.init(nav,data[e.index]),{animated:true});
 			//nav.open(App.UI.messages.init(nav,data[e.index]), {animated:true});
 		});
 			
