@@ -74,7 +74,7 @@ App.UI.calendar = {
 					tempSection.headerTitle = myDate;
 				}
 				
-				var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
+				var row        = Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true,myIndex:i});
 				row.height 	= 60;
 				var label 	= Ti.UI.createLabel({text:arrDate[2],font:{fontSize:40}, color:"white", left:3, backgroundColor:"gray", width:50, textAlign:"center"});
 				row.add(label);
