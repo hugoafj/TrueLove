@@ -36,12 +36,10 @@ App.UI.message = {
 	
 			
 			if(Ti.App.Properties.getString('fromwin')=='calendar'){
-				
-	
-				for(var i = 0;i < _text.application.length;i++){
-					if(_text.application>0){
-						
-						alert('si entra');
+
+				if(_text.application){
+					for(var i = 0;i < _text.application.length;i++){
+						if(_text.application.length>0)
 						mytextApplication='_______________________________'+'\n'+'\n'+_text.application[0].text;
 						
 					}

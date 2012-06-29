@@ -10,7 +10,7 @@ App.UI.save = {
 		
 	// INSTANTIATION
 		var style 			= App.UI.save.style;
-		var win 			= Titanium.UI.createWindow({height:370,top:0});
+		var win 			= Titanium.UI.createWindow({height:430,top:0});
 		var win_favs		= Titanium.UI.createWindow(style.win);
 		var nav = Titanium.UI.iPhone.createNavigationGroup({
 		   window: win_favs
@@ -86,10 +86,14 @@ App.UI.save = {
 					backgroundImage:'/images/arrowOpen.png'
 				});
 			App.UI.menu.win.animate({bottom:-60,duration:50});
+			App.UI.menu.tempWin = App.UI.message.init(nav,arrResult[e.index]);
+			App.UI.menu.windows.push({win:App.UI.menu.tempWin,nav:nav});
+			//nav.open(App.UI.menu.tempWin, {animated:true});
 			//nav.open(App.UI.message.init(nav,arrResult[e.index].text,arrResult[e.index].date,arrResult[e.index].cat), {animated:true});
 			Ti.API.info(JSON.stringify(arrResult[e.index]));
 			Ti.App.Properties.setString('fromwin', 'favorites');
-			nav.open(App.UI.message.init(nav,arrResult[e.index]), {animated:true});
+			//nav.open(App.UI.message.init(nav,arrResult[e.index]), {animated:true});
+			nav.open(App.UI.menu.tempWin, {animated:true});
 
 		});
 		
