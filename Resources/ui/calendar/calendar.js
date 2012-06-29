@@ -9,7 +9,7 @@ App.UI.calendar = {
 	init: function() {
 		
 	// INSTANTIATION
-		var win 				= Titanium.UI.createWindow({height:370,top:0});
+		var win 				= Titanium.UI.createWindow({height:430,top:0});
 		var style 				= App.UI.calendar.style;
 		var win_calendar 		= Titanium.UI.createWindow(style.win_calendar);
 		var table 				= Titanium.UI.createTableView();
@@ -17,7 +17,7 @@ App.UI.calendar = {
 		var nav = Titanium.UI.iPhone.createNavigationGroup({
 		   window: win_calendar
 		});
-		
+		App.UI.calendar.nav = nav;
 		
 	// STYLING
 		
@@ -57,32 +57,39 @@ App.UI.calendar = {
 			var myDate = "";
 			var tempSection;
 			for(var i = 0;i < data.length;i++){
-				//Ti.API.info(data[i]._date);
+				//var now = new Date();
+				//Ti.API.info(JSON.stringify(data[i]._date));
 				var arrDate = data[i]._date.split("-");
+				//Ti.API.info(new Date(arrDate[0],arrDate[1],arrDate[2]).getTime()+ " : " +new Date().getTime());
 				//Ti.API.info(JSON.stringify(arrDate));
-				if(parseInt(arrDate[1]) > 00)
-					var m = months[parseInt(arrDate[1])-1].month
-				else
-					var m = "-------";
-				
-				//Ti.API.info(myDate+" ::: "+m+" "+arrDate[0]);
-				if(myDate != m+" "+arrDate[0]){
-					if(myDate != "")
-						dataRows.push(tempSection);
-					myDate = m+" "+arrDate[0];
-					tempSection = Titanium.UI.createTableViewSection({headerTitle:myDate});
-					tempSection.headerTitle = myDate;
+				if(new Date(arrDate[0],arrDate[1]-1,arrDate[2]).getTime() <= new Date().getTime()){
+					//Ti.API.info(new Date(0000,arrDate[1],00).getTime());
+					if(parseInt(arrDate[1]) > 00)
+						var m = months[parseInt(arrDate[1])-1].month;
+					else if(new Date(0000,arrDate[1],00).getTime() == -2185470000000)
+						var m = months[arrDate[1]-1].month;
+					else
+						var m = "-------";
+					
+					//Ti.API.info(myDate+" ::: "+m+" "+arrDate[0]);
+					if(myDate != m+" "+arrDate[0]){
+						if(myDate != "")
+							dataRows.push(tempSection);
+						myDate = m+" "+arrDate[0];
+						tempSection = Titanium.UI.createTableViewSection({headerTitle:myDate});
+						tempSection.headerTitle = myDate;
+					}
+					
+					var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
+					row.height 	= 60;
+					var label 	= Ti.UI.createLabel({text:arrDate[2],font:{fontSize:40}, color:"white", left:3, backgroundColor:"gray", width:50, textAlign:"center"});
+					row.add(label);
+					var label 	= Ti.UI.createLabel({text:data[i].topic,font:{fontSize:18,fontWeight:"bold"}, left:60, top:7, height:25});
+					row.add(label);
+					var label 	= Ti.UI.createLabel({text:data[i].scripture,font:{fontSize:12}, color:"gray", left:60, top:25});
+					row.add(label);
+					tempSection.add(row);
 				}
-				
-				var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
-				row.height 	= 60;
-				var label 	= Ti.UI.createLabel({text:arrDate[2],font:{fontSize:40}, color:"white", left:3, backgroundColor:"gray", width:50, textAlign:"center"});
-				row.add(label);
-				var label 	= Ti.UI.createLabel({text:data[i].topic,font:{fontSize:18,fontWeight:"bold"}, left:60, top:7, height:25});
-				row.add(label);
-				var label 	= Ti.UI.createLabel({text:data[i].scripture,font:{fontSize:12}, color:"gray", left:60, top:25});
-				row.add(label);
-				tempSection.add(row);
 				
 			}
 			dataRows.push(tempSection);
@@ -109,7 +116,9 @@ App.UI.calendar = {
 			TL.merge(App.UI.menu.vwOpenClose,{
 					backgroundImage:'/images/arrowOpen.png'
 				});
-			nav.open(App.UI.message.init(nav,data[e.index]),{animated:true});
+			App.UI.menu.tempWin = App.UI.message.init(nav,data[e.index]);
+			App.UI.menu.windows.push({win:App.UI.menu.tempWin,nav:nav});
+			nav.open(App.UI.menu.tempWin,{animated:true});
 			//nav.open(App.UI.messages.init(nav,data[e.index]), {animated:true});
 		});
 			

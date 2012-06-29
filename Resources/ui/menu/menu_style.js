@@ -30,6 +30,22 @@ App.UI.menu.style = {
 		height:28,
 		backgroundImage:'/images/logoMenu.png'
 	},
+	vwLineBack:{
+		height:31,
+		left:0,
+		top:-1,
+		width:35,
+		borderColor:"#707070",
+		borderWidth:0.5,
+		id:"no"
+	},
+	vwArrowBack:{
+		width:11,
+		height:19,
+		left:10,
+		backgroundImage:'/images/arrowBack.png',
+		id:"no"
+	},
 	vwLine:{
 		width:1,
 		height:30,

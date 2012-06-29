@@ -10,7 +10,7 @@ App.UI.webpage.style = {
 	    backgroundColor:'white',
 	    navBarHidden:true,
 	    zIndex:0,
-	    height:370,
+	    height:430,
 	    top:0
 	},
 	web:{

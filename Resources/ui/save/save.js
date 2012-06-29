@@ -10,7 +10,7 @@ App.UI.save = {
 		
 	// INSTANTIATION
 		var style 			= App.UI.save.style;
-		var win 			= Titanium.UI.createWindow({height:370,top:0});
+		var win 			= Titanium.UI.createWindow({height:430,top:0});
 		var win_favs		= Titanium.UI.createWindow(style.win);
 		var nav = Titanium.UI.iPhone.createNavigationGroup({
 		   window: win_favs
@@ -56,7 +56,7 @@ App.UI.save = {
 				var arrDate = _result[i].date.split("-");
 		
 				if(parseInt(arrDate[1]) > 00)
-					var m = months[parseInt(arrDate[1])].month+" "+arrDate[2]+", "+_result[i].cat;
+					var m = months[parseInt(arrDate[1])-1].month+" "+arrDate[2]+", "+_result[i].cat;
 				else
 					var m = "------- --"+", "+_result[i].cat;;
 				var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
@@ -84,7 +84,9 @@ App.UI.save = {
 					backgroundImage:'/images/arrowOpen.png'
 				});
 			App.UI.menu.win.animate({bottom:-60,duration:50});
-			nav.open(App.UI.message.init(nav,arrResult[e.index].text,arrResult[e.index].date,arrResult[e.index].cat), {animated:true});
+			App.UI.menu.tempWin = App.UI.message.init(nav,arrResult[e.index].text,arrResult[e.index].date,arrResult[e.index].cat);
+			App.UI.menu.windows.push({win:App.UI.menu.tempWin,nav:nav});
+			nav.open(App.UI.menu.tempWin, {animated:true});
 		});
 		
 		
