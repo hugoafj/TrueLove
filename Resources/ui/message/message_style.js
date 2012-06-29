@@ -27,14 +27,14 @@ App.UI.message.style = {
 		width:21,
 		height:19,
 		top:10,
-		left:95
+		left:10
 	},
 	share:{
 		backgroundImage:'/images/share.png',
 		width:23,
 		height:18,
-		top:10,
-		left:204
+		top:11,
+		left:50
 	},
 	date:{
 		//text:'Nomember 28',

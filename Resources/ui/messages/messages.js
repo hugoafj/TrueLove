@@ -15,7 +15,8 @@ App.UI.messages = {
 		var title			= Ti.UI.createLabel(style.title);
 		var line			= Ti.UI.createView(style.line);
 		var table 			= Titanium.UI.createTableView({top:43});
-
+		
+		Ti.API.info(JSON.stringify(_data));
 		
 		
 	// STYLING

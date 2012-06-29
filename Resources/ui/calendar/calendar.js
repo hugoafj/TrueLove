@@ -109,7 +109,8 @@ App.UI.calendar = {
 			TL.merge(App.UI.menu.vwOpenClose,{
 					backgroundImage:'/images/arrowOpen.png'
 				});
-			nav.open(App.UI.messages.init(nav,data[e.index]), {animated:true});
+			nav.open(App.UI.message.init(nav,data[e.index]),{animated:true});
+			//nav.open(App.UI.messages.init(nav,data[e.index]), {animated:true});
 		});
 			
 	return win;

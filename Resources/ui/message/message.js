@@ -6,8 +6,8 @@ App.UI.message = {
 	/**
 	 * Initializes the class
 	 **/
-	init: function(_nav,_text,_date,_cat) {
-		
+	//init: function(_nav,_text,_date,_cat) {
+	init: function(_nav,_text) {
 	// INSTANTIATION
 		var style 			= App.UI.message.style;
 		var win				= Titanium.UI.createWindow(style.win);
@@ -21,24 +21,25 @@ App.UI.message = {
 		var txtMsg			= Ti.UI.createLabel(style.txtMsg);
 		var login 			= Ti.Facebook.createLoginButton(style.login);
 		var status=0;
+		var shareStatus=0;
 		
 		Titanium.Facebook.appid = "404794309570960";
 		Titanium.Facebook.permissions = ['publish_stream', 'read_stream'];
 		
 	// STYLING
-		TL.merge(type,{
-			text:_cat
-		});
+		//TL.merge(type,{
+			//text:_cat
+		//});
 		TL.merge(txtMsg,{
-			text:_text
+			text:_text.scripture+'\n'+'______________________________'+'\n'+'\n'+_text.wisdom+'\n'+'______________________________'+'\n'+'\n'+_text.application
 		});
 		
 	// ADDITIONS
-		win.add(backBtn);
+		//win.add(backBtn);
 		win.add(favStar);
 		win.add(share);
 		win.add(date);
-		win.add(type);
+		//win.add(type);
 		win.add(line);
 		win.add(scvMsg);
 		scvMsg.add(txtMsg);
@@ -52,8 +53,11 @@ App.UI.message = {
 		
 		// Populate the TableView data.
 		var data = [
-			{title:'Facebook', hasChild:true, color:'blue', header:'Account'}
+			{title:'Facebook', hasChild:true, color:'blue', header:'Account'},
+			{title:'Send SMS', hasChild:true, color:'green'},
+			{title:'Send email', hasChild:true, color:'red'},
 			];
+			
 		aTableView.setData(data);
 		
 		// Listen for click events.
@@ -89,7 +93,7 @@ App.UI.message = {
 		months.push({month:"November"});
 		months.push({month:"December"});
 		
-		var arrDate = _date.split("-");
+		var arrDate = _text._date.split("-");
 		
 		if(parseInt(arrDate[1]) > 00)
 			var m = months[parseInt(arrDate[1])-1].month
@@ -138,8 +142,16 @@ App.UI.message = {
 
 	share.addEventListener('click', function() {
 		
-		aTableView.top=250;
-				
+		
+		if(shareStatus==0){
+			aTableView.top=250;
+			shareStatus=1;
+		}
+		else{
+			aTableView.top=600;
+			shareStatus=0;
+		}
+					
 	});
 	
 	Ti.Facebook.addEventListener('login', function(e) {
@@ -161,9 +173,9 @@ App.UI.message = {
 		favStar.addEventListener("click",function(){
 			var insert = {
 				id_user:Ti.App.Properties.getInt('idUser'),
-				cat:_cat,
+				//cat:_cat,
 				text:_text,
-				date:_date
+				date:_text._date
 			};
 			var lastID=App.API.DB.insertRecord(insert,function(){});
 			if(lastID > 0)
