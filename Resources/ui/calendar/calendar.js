@@ -116,7 +116,7 @@ App.UI.calendar = {
 			TL.merge(App.UI.menu.vwOpenClose,{
 					backgroundImage:'/images/arrowOpen.png'
 				});
-			App.UI.menu.tempWin = App.UI.message.init(nav,data[e.row.myIndex]);
+			App.UI.menu.tempWin = App.UI.message.init(nav,data[e.row.myIndex],'calendar');
 			App.UI.menu.windows.push({win:App.UI.menu.tempWin,nav:nav});
 			//nav.open(App.UI.menu.tempWin,{animated:true});
 			

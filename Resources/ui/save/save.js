@@ -86,7 +86,7 @@ App.UI.save = {
 					backgroundImage:'/images/arrowOpen.png'
 				});
 			App.UI.menu.win.animate({bottom:-60,duration:50});
-			App.UI.menu.tempWin = App.UI.message.init(nav,arrResult[e.index]);
+			App.UI.menu.tempWin = App.UI.message.init(nav,arrResult[e.index],'favorites');
 			App.UI.menu.windows.push({win:App.UI.menu.tempWin,nav:nav});
 			//nav.open(App.UI.menu.tempWin, {animated:true});
 			//nav.open(App.UI.message.init(nav,arrResult[e.index].text,arrResult[e.index].date,arrResult[e.index].cat), {animated:true});

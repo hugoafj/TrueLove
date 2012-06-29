@@ -7,7 +7,7 @@ App.UI.message = {
 	 * Initializes the class
 	 **/
 	//init: function(_nav,_text,_date,_cat) {
-	init: function(_nav,_text) {
+	init: function(_nav,_text,_fromwin) {
 		
 		Ti.API.info(JSON.stringify(_text));
 	// INSTANTIATION
@@ -36,7 +36,7 @@ App.UI.message = {
 		//});
 	
 			
-			if(Ti.App.Properties.getString('fromwin')=='calendar'){
+			if(_fromwin=='calendar'){
 				if(_text.application){
 					for(var i = 0;i < _text.application.length;i++){
 						if(_text.application.length>0)
@@ -46,7 +46,7 @@ App.UI.message = {
 				}
 				x=_text.scripture+'\n'+'_______________________________'+'\n'+'\n'+_text.wisdom+'\n'+mytextApplication
 			}
-			if(Ti.App.Properties.getString('fromwin')=='favorites'){
+			if(_fromwin=='favorites'){
 				Ti.API.info(JSON.stringify(_text));
 				x=_text.text;
 			}	
