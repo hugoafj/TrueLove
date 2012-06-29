@@ -53,12 +53,14 @@ App.UI.save = {
 		var arrResult = App.API.DB.getMessages(Ti.App.Properties.getInt('idUser'),function(_result){
 		
 			for(var i = 0;i < _result.length;i++){
-				var arrDate = _result[i].date.split("-");
+				var arrDate = _result[i]._date.split("-");
 		
 				if(parseInt(arrDate[1]) > 00)
-					var m = months[parseInt(arrDate[1])].month+" "+arrDate[2]+", "+_result[i].cat;
+					//var m = months[parseInt(arrDate[1])].month+" "+arrDate[2]+", "+_result[i].cat;
+					var m = months[parseInt(arrDate[1])-1].month+" "+arrDate[2]+" ";
 				else
-					var m = "------- --"+", "+_result[i].cat;;
+					//var m = "------- --"+", "+_result[i].cat;
+					var m = "------- --";
 				var row		= Titanium.UI.createTableViewRow({backgroundColor:'white', hasChild:true});
 				row.height 	= 60;
 				var label 	= Ti.UI.createLabel({text:m,font:{fontSize:18,fontWeight:"bold"}, left:6, top:7});
@@ -84,7 +86,11 @@ App.UI.save = {
 					backgroundImage:'/images/arrowOpen.png'
 				});
 			App.UI.menu.win.animate({bottom:-60,duration:50});
-			nav.open(App.UI.message.init(nav,arrResult[e.index].text,arrResult[e.index].date,arrResult[e.index].cat), {animated:true});
+			//nav.open(App.UI.message.init(nav,arrResult[e.index].text,arrResult[e.index].date,arrResult[e.index].cat), {animated:true});
+			Ti.API.info(JSON.stringify(arrResult[e.index]));
+			Ti.App.Properties.setString('fromwin', 'favorites');
+			nav.open(App.UI.message.init(nav,arrResult[e.index]), {animated:true});
+
 		});
 		
 		

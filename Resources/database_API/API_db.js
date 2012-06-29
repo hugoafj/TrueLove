@@ -76,7 +76,7 @@ App.API.DB = {
 	      		id:result.fieldByName('id'),
 				cat:result.fieldByName('cat'),
 				text:result.fieldByName('text'),
-				date:result.fieldByName('date'),
+				_date:result.fieldByName('date'),
 				id_user:result.fieldByName('id_user')
 			});
 		  
