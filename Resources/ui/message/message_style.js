@@ -9,6 +9,9 @@ App.UI.message.style = {
 	    title:'Message',
 	    backgroundColor:'white',
 	    navBarHidden:true,
+	    zIndex:0,
+	    height:430,
+	    top:0
 	},
 	backBtn:{
 		height:24,

@@ -12,7 +12,7 @@ Ti.include(
 	"/database_API/API_db.js",
 	"/urbanairship/urbanairship.js"
 );
-App.UI.urbanairship.init();
+//App.UI.urbanairship.init();
 App.API.DB.init(function(){});
 //App.UI.app.init();
 

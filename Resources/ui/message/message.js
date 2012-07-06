@@ -7,7 +7,7 @@ App.UI.message = {
 	 * Initializes the class
 	 **/
 	//init: function(_nav,_text,_date,_cat) {
-	init: function(_nav,_text) {
+	init: function(_nav,_text,_fromwin) {
 		
 	// INSTANTIATION
 		var style 			= App.UI.message.style;
@@ -21,38 +21,42 @@ App.UI.message = {
 		var scvMsg			= Ti.UI.createScrollView(style.scvMsg);			
 		var txtMsg			= Ti.UI.createLabel(style.txtMsg);
 		var login 			= Ti.Facebook.createLoginButton(style.login);
+		
 		var status=0;
 		var shareStatus=0;
 		var mytextApplication="";
+		var dataApp="";
+		var dataScripture="";
+		var dataFavorites=""
 		var x="";
 		
 		Titanium.Facebook.appid = "404794309570960";
 		Titanium.Facebook.permissions = ['publish_stream', 'read_stream'];
 		
-	// STYLING
-		//TL.merge(type,{
-			//text:_cat
-		//});
-	
-			
-			if(Ti.App.Properties.getString('fromwin')=='calendar'){
+
+			if(_fromwin=='calendar'){
 
 				if(_text.application){
 					for(var i = 0;i < _text.application.length;i++){
 						if(_text.application.length>0)
+						dataApp=_text.application[0].text;
 						mytextApplication='_______________________________'+'\n'+'\n'+_text.application[0].text;
 						
 					}
 				}
+				dataScripture=_text.wisdom;
 				x=_text.scripture+'\n'+'_______________________________'+'\n'+'\n'+_text.wisdom+'\n'+mytextApplication
 			}
-			if(Ti.App.Properties.getString('fromwin')=='favorites'){
+			if(_fromwin=='favorites'){
+				dataFavorites=_text.text;
+				
 				Ti.API.info(JSON.stringify(_text));
 				x=_text.text;
 				
 		Ti.API.info(JSON.stringify(_text));
 			}	
 				
+				txtMsg.text=x;
 			
 		
 		
@@ -72,13 +76,14 @@ App.UI.message = {
 	// CODE
 			
 			// Create a TableView.
-		var aTableView = Ti.UI.createTableView({height:175,bottom:-200,scrollable:false});
+		var aTableView = Ti.UI.createTableView({height:175,bottom:-200,scrollable:true});
 		
 		// Populate the TableView data.
 		var data = [
 			{title:'Facebook', hasChild:true, color:'blue', header:'Account'},
 			{title:'Send SMS', hasChild:true, color:'green'},
 			{title:'Send email', hasChild:true, color:'red'},
+			{title:'Twitter', hasChild:true, color:'blue'}
 			];
 			
 		aTableView.setData(data);
@@ -96,6 +101,133 @@ App.UI.message = {
 					posttoFacebook();
 				//status='true';
 			}
+			if(e.row.title=='Twitter'){
+				
+				aTableView.top=600;
+				var myview= Ti.UI.createView({
+					top : 0,
+           			 width : 380,
+		           	 height : 460,
+		             backgroundLeftCap : 100,
+		             backgroundTopCap : 100,
+			 		 backgroundImage:'/images/view_background.png',
+			 		 zIndex : 1000,
+				});
+				
+				var viewBtn=Ti.UI.createButton({
+					backgroundImage : '/images/iphone_help_button_cancel.png',
+			        backgroundSelectedImage : '/images/iphone_help_button_cancel_pressed.png',
+			        font : {
+			            fontFamily: 'Knowledge-Bold',
+			            fontSize : 12
+			        },
+			        top : 10,
+			        right : 40,
+			        height : 35,
+			        width : 70,
+			        title : 'Cancel'
+					
+				});
+				
+				myview.add(viewBtn);
+				
+				viewBtn.addEventListener('click',function(e){
+					myview.hide();
+					win.remove(myview);
+					myView = null;
+					
+				});
+	
+					
+					var mydata=  dataApp+dataScripture+dataFavorites;
+					
+					if(mydata.length > 140){
+						mydata = mydata.substring(0, 136).trim() + "...";
+					}
+					
+					Ti.API.info(mydata);
+				var mwebview=Ti.UI.createWebView({
+					url:"http://twitter.com/home?status="+mydata,
+		 			top : 60,
+	                width : 300,
+	                height : 350
+				});
+				myview.add(mwebview);
+				win.add(myview);
+				
+			
+				
+				
+				/*
+				var module	= require('de.marcelpociot.twitter');
+				module.tweet({
+					message: 	'Hey, this is some cool tweet!',
+					urls: 		['http://www.marcelpociot.de'],
+					images:		['http://www.marcelpociot.de/logo.png'],
+					succes:		function(){
+						alert("Tweet successfully sent");
+					},
+					cancel:		function(){
+						alert("User canceled tweet");
+					},
+					error:		function(){
+						alert("Unable to send tweet");
+					}
+				});
+
+				*/
+			}
+			if(e.row.title=='Send email'){
+				
+				var emailDialog = Ti.UI.createEmailDialog()
+				
+				
+				emailDialog.messageBody = txtMsg.text;
+				
+				
+				emailDialog.open();
+			}
+			if(e.row.title=='Send SMS'){
+				var module = require('com.omorandi');
+
+
+		//instantiate the module
+								
+				//create the smsDialog object
+				var smsDialog = module.createSMSDialog();
+				
+				//check if the feature is available on the device at hand
+				if (!smsDialog.isSupported())
+				{
+					//falls here when executed on iOS versions < 4.0 and in the emulator
+					var a = Ti.UI.createAlertDialog({title: 'warning', message: 'the required feature is not available on your device'});
+					a.show();
+				}
+				else
+				{
+					//pre-populate the dialog with the info provided in the following properties
+					smsDialog.recipients = [];
+					smsDialog.messageBody = "";
+					
+					//set the color of the title-bar
+					smsDialog.barColor = '#2979b0';
+					
+					//add an event listener for the 'complete' event, in order to be notified about the result of the operation
+					smsDialog.addEventListener('complete', function(e){
+						//Ti.API.info("Result: " + e.error);
+						var a = Ti.UI.createAlertDialog({title: 'complete', message: 'Result: ' + e.error});
+						//a.show();
+					});
+				
+					//open the SMS dialog window with slide-up animation
+					smsDialog.open({animated: true});
+				}
+				
+				
+				
+				
+			}
+			
 			
 		});
 		
@@ -178,6 +310,7 @@ App.UI.message = {
 	});
 	
 	Ti.Facebook.addEventListener('login', function(e) {
+		
 	    if (e.success) {
 	    	Ti.App.Properties.setString('face',"true");
 	    	Ti.API.info(111);
@@ -185,6 +318,7 @@ App.UI.message = {
 		    	posttoFacebook();
 		    	status=1;
 	    	}
+	    	Ti.API.info(e);
 	    } else if (e.error) {
 	        alert(e.error);
 	    } else if (e.cancelled) {
@@ -213,12 +347,12 @@ App.UI.message = {
 				link: "http://truelovefm.com/",
 				name: "Truelove.fm",
 				message: "Download the application truelove",
-				caption:_cat ,
+				caption:"" ,
 				picture: "http://truelove.fm/app/admin/images/logo.png",
-				description: _text,
+				description: txtMsg.text,
 				test: [ {foo:'Encoding test', bar:'Durp durp'}, 'test' ]
 			};
-			Ti.API.info(222);
+			
 			Titanium.Facebook.requestWithGraphPath('me/feed', data, 'POST', showRequestResult);
 			status=0;
 		}

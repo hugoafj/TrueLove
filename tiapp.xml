@@ -9,12 +9,12 @@
     <deployment-targets>
         <target device="mobileweb">true</target>
         <target device="iphone">true</target>
-        <target device="ipad">true</target>
+        <target device="ipad">false</target>
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <sdk-version>2.1.0.v20120504170331</sdk-version>
-    <id>com.hugoafj.truelove</id>
+    <sdk-version>2.1.0.v20120403134828</sdk-version>
+    <id>com.test.testtl</id>
     <name>TrueLove</name>
     <version>1.0</version>
     <publisher>hugoafj</publisher>
@@ -30,6 +30,7 @@
     <navbar-hidden>false</navbar-hidden>
     <analytics>true</analytics>
     <guid>956fee52-8872-4be3-8cbc-e00d213d996b</guid>
+    <property name="ti.facebook.appid">404794309570960</property>
     <property name="ti.ui.defaultunit">system</property>
     <iphone>
         <orientations device="iphone">
@@ -53,5 +54,6 @@
     </mobileweb>
     <modules>
         <module platform="commonjs" version="2.0.5">ti.cloud</module>
+        <module platform="iphone" version="0.3">com.omorandi</module>
     </modules>
 </ti:app>
